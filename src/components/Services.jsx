@@ -8,21 +8,21 @@ const cards = [
     topic: "DESIGNING",
     description:
       "Crafting clean, responsive interfaces with a focus on user experience — from wireframes and Figma prototypes to polished, pixel-perfect layouts that look great on every device.",
-    image: "/images/Services/designing.png",
+    image: "/images/Services/designing.jpg",
   },
   {
     id: "02",
     topic: "DEVELOPMENT",
     description:
       "Building fast, scalable web applications using Next.js, React, and modern full-stack tools — including CMS integration, REST APIs, authentication, and custom dashboards.",
-    image: "/images/Services/development.png",
+    image: "/images/Services/development.jpg",
   },
   {
     id: "03",
     topic: "ANIMATIONS & AI",
     description:
       "Bringing sites to life with scroll animations, page transitions, and micro-interactions using GSAP and Framer Motion — plus AI integrations and automation for smarter digital experiences.",
-    image: "/images/Services/ai.png",
+    image: "/images/Services/ai.jpg",
   },
 ];
 

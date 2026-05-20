@@ -3,25 +3,25 @@ import React, { useRef, useCallback, useState, useEffect } from 'react'
 
 const workCard = [
   {
-    image: '/images/Strategy/Strategy-Thumbnail.png',
+    image: '/images/Strategy/Strategy-Thumbnail.jpg',
     name: 'Strategy',
     link: 'www.khakigemstone.com',
     tag: 'Phase 01',
     images: [
       {
-        src: '/images/Strategy/Strategy-1.png',
+        src: '/images/Strategy/Strategy-1.jpg',
         title: 'Discovery Call',
         description: 'Every project starts with a live conversation. We sit down with you to understand your goals, your users, and the competitive landscape. No templates, no assumptions — just focused questions and real listening.',
         detail: 'We map out success metrics, project constraints, and non-negotiables before a single pixel is touched.',
       },
       {
-        src: '/images/Strategy/Strategy-2.png',
+        src: '/images/Strategy/Strategy-2.jpg',
         title: 'Research & Analysis',
         description: 'Once we understand your world, we go deep. Competitor audits, user persona mapping, market positioning — all synthesized into a working strategy board that the entire team aligns around.',
         detail: 'Deliverable: a shared research board with findings, personas, and opportunity gaps clearly defined.',
       },
       {
-        src: '/images/Strategy/Strategy-3.png',
+        src: '/images/Strategy/Strategy-3.jpg',
         title: 'Roadmap & Sign-off',
         description: 'Strategy without a plan is just talk. We translate all research into a concrete project roadmap — phases, timelines, deliverables, and milestones — then walk you through every line before you approve.',
         detail: 'Nothing moves to design until the roadmap has your written sign-off. This protects you and us.',
@@ -34,25 +34,25 @@ const workCard = [
     ],
   },
   {
-    image: '/images/Designing/Designing-thumbnail.png',
+    image: '/images/Designing/Designing-thumbnail.jpg',
     name: 'Designing',
     link: 'www.khakigemstone.com',
     tag: 'Phase 02',
     images: [
       {
-        src: '/images/Designing/Designing-1.png',
+        src: '/images/Designing/Designing-1.jpg',
         title: 'Wireframes & Structure',
         description: 'Before any colour or style, we map out the skeleton of every screen. Wireframes define layout, hierarchy, and user flow — solving structural problems early, when changes are cheap.',
         detail: 'Wireframes are reviewed and approved before we move into visual design.',
       },
       {
-        src: '/images/Designing/Designing-2.png',
+        src: '/images/Designing/Designing-2.jpg',
         title: 'Visual Design',
         description: 'With structure locked in, we apply the full visual layer — typography, colour system, spacing, motion. Every decision is rooted in your brand and the strategy we built together.',
         detail: 'Deliverable: a complete Figma file with all screens, components, and design tokens.',
       },
       {
-        src: '/images/Designing/Designing-3.png',
+        src: '/images/Designing/Designing-3.jpg',
         title: 'Prototype & Handoff',
         description: 'Interactive prototypes let you feel the product before it\'s built. We click through every flow, collect your feedback, finalise every detail, then hand off a developer-ready Figma file.',
         detail: 'Two revision rounds are included. Additional rounds are scoped separately.',
@@ -65,25 +65,25 @@ const workCard = [
     ],
   },
   {
-    image: '/images/Developer/Developer-thumbnail.png',
+    image: '/images/Developer/Developer-thumbnail.jpg',
     name: 'Development',
     link: 'www.khakigemstone.com',
     tag: 'Phase 03',
     images: [
       {
-        src: '/images/Developer/Developer-1.png',
+        src: '/images/Developer/Developer-1.jpg',
         title: 'Architecture & Setup',
         description: 'We scaffold the project with the right stack for your scale — Next.js, Tailwind, headless CMS, or no-code depending on your needs. CI/CD pipelines and code standards are set from day one.',
         detail: 'No cowboy coding. Every project follows a structured repo, code review process, and deployment pipeline.',
       },
       {
-        src: '/images/Developer/Developer-2.png',
+        src: '/images/Developer/Developer-2.jpg',
         title: 'Build & Review',
         description: 'Components are built in isolation, tested, then assembled into full pages. You have access to a staging environment throughout — so you can follow progress in real time and flag anything early.',
         detail: 'Weekly check-ins keep you in the loop without slowing the team down.',
       },
       {
-        src: '/images/Developer/Developer-3.png',
+        src: '/images/Developer/Developer-3.jpg',
         title: 'Launch & Handoff',
         description: 'When everything is tested and approved, we deploy to production. You receive a full handoff — documented codebase, CMS training, and a post-launch window for any immediate fixes.',
         detail: 'Post-launch support packages are available for ongoing maintenance and feature work.',

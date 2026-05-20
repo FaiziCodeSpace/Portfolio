@@ -15,28 +15,28 @@ function ClientsExperiences() {
             review: "This Agency helped me to the end, I never knew I would get my project done so fast and so perfect. They were connected with me throughout the whole process, showing me everything before moving to the next step.",
             name: "Ayub Khan",
             position: "CEO of KhakiGemstone",
-            logo: '/images/test.png'
+            logo: '/images/test.jpg'
         },
         {
             CompanyName: "StoneCraft Ltd",
             review: "Professional, fast, and highly skilled team. They understood our requirements clearly and delivered exactly what we needed without delays.",
             name: "Hassan Raza",
             position: "Managing Director",
-            logo: '/images/test.png'
+            logo: '/images/test.jpg'
         },
         {
             CompanyName: "GemWorld Traders",
             review: "The communication was excellent and the quality of work exceeded expectations. I would definitely recommend them to anyone looking for reliable services.",
             name: "Ali Sher",
             position: "Founder",
-            logo: '/images/test.png'
+            logo: '/images/test.jpg'
         },
         {
             CompanyName: "Precious Exports",
             review: "From design to deployment, everything was handled smoothly. The team was responsive and made sure every detail was perfect.",
             name: "Usman Tariq",
             position: "Operations Head",
-            logo: '/images/test.png'
+            logo: '/images/test.jpg'
         }
     ];
 
