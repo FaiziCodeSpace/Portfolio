@@ -15,7 +15,7 @@ const projects = [
     hours: "120+",
     pages: "40+",
     liveUrl: "https://khakigemstone.com",
-    image: "/images/Khakigemstone/image-1.jpg",
+    image: "/images/Khakigemstone/Image-1.jpg",
   },
   {
     title: "Smart Stamp Generator & AgentHub — Car Dealer Document & Field Agent Platform",
@@ -30,7 +30,7 @@ const projects = [
     hours: "80+",
     pages: "20+",
     liveUrl: "https://khakigemstone.com",
-    image: "/images/Agenthub/image-1.jpg",
+    image: "/images/Agenthub/Image-1.jpg",
   },
   {
     title: "Personal Developer Portfolio — Next.js Web App with Multi-Section UI & Theme System",
