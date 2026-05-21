@@ -82,15 +82,33 @@ function Modal({ plan, onClose }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", website: "", message: "", date: "", time: "" });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   if (!plan) return null;
 
   const handle = (e) => { setForm((p) => ({ ...p, [e.target.name]: e.target.value })); setError(""); };
 
-  const submit = (e) => {
+
+
+  const submit = async (e) => {
     e.preventDefault();
     if (!form.email.trim()) { setError("Email is required."); return; }
-    setSubmitted(true);
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, plan }),
+      });
+      const data = await res.json();
+      if (!res.ok) { setError(data.error || "Something went wrong."); return; }
+      setSubmitted(true);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const Icon = plan.icon;
@@ -398,15 +416,17 @@ function Modal({ plan, onClose }) {
                 </div>
               </div>
 
-              <button type="submit" className="shimmer-btn" style={{
+              <button type="submit" className="shimmer-btn" disabled={loading} style={{
                 position: "relative", overflow: "hidden",
                 width: "100%", height: "46px", borderRadius: "10px", border: "none",
                 backgroundColor: "var(--color-brand)", color: "#09090b",
-                fontSize: "14px", fontWeight: 700, cursor: "pointer",
+                fontSize: "14px", fontWeight: 700,
+                cursor: loading ? "not-allowed" : "pointer",
+                opacity: loading ? 0.7 : 1,
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
               }}>
                 <Send size={15} />
-                Send request
+                {loading ? "Sending…" : "Send request"}
               </button>
 
               <p style={{ textAlign: "center", fontSize: "12px", color: "var(--color-muted)", margin: 0 }}>
