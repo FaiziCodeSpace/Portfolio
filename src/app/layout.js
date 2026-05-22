@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/UI/Theme-provider";
 import PageLoader from "@/components/UI/PageLoader";
 import { Bebas_Neue } from "next/font/google";
 import localFont from "next/font/local";
+import SmoothScroll from "@/components/UI/SmoothScroll";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -49,13 +50,16 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${satoshi.variable} h-full antialiased`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col"  suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <PageLoader />
           <Navbar />
-          {children}
+
+          <SmoothScroll>
+            {children}
+          </SmoothScroll>
         </ThemeProvider>
-        
+
       </body>
     </html>
   );

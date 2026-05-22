@@ -104,8 +104,8 @@ export function ContactModal({ onClose }) {
             <h2 style={{ fontSize: "28px", fontWeight: 800, color: "#09090b", margin: "0 0 8px", lineHeight: 1.15 }}>Let's talk</h2>
             <p style={{ fontSize: "13px", color: "rgba(9,9,11,0.65)", margin: "0 0 2rem", lineHeight: 1.6 }}>Have a question or idea? Drop us a message and we'll get back to you promptly.</p>
             {[
-              { icon: <Mail size={15} color="#09090b" />, label: "Email", value: "hello@yoursite.com" },
-              { icon: <Phone size={15} color="#09090b" />, label: "Phone", value: "+1 (555) 000-0000" },
+              { icon: <Mail size={15} color="#09090b" />, label: "Email", value: "faizanwebdev1@gmail.com" },
+              { icon: <Phone size={15} color="#09090b" />, label: "Phone", value: "+92 315 070-6255" },
             ].map(({ icon, label, value }) => (
               <div key={label} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
                 <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "rgba(9,9,11,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{icon}</div>

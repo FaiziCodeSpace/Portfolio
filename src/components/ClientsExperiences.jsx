@@ -221,7 +221,7 @@ function ClientsExperiences() {
 
     // ─────────────────────────────────────────────────────────────────────────
     return (
-        <section className="mt-[clamp(80px,12vw,350px)] overflow-hidden">
+        <section id="testimonials" className="mt-[clamp(80px,12vw,350px)] overflow-hidden">
 
             {/* ── Header (untouched) ── */}
             <div className="flex justify-between items-center">
@@ -285,12 +285,6 @@ function ClientsExperiences() {
                             >
                                 {/* Logo + Company */}
                                 <div className="flex gap-3 items-center">
-                                    <img
-                                        className="w-[clamp(32px,5vw,55px)]"
-                                        src={testimonial.logo}
-                                        alt="company-logo"
-                                        draggable={false}
-                                    />
                                     <h2 className="text-[clamp(18px,3vw,34px)] font-medium leading-tight">
                                         {testimonial.CompanyName}
                                     </h2>
