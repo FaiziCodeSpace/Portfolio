@@ -1,20 +1,17 @@
-// src/lib/email/resend.js
-import { Resend } from "resend";
+// src/lib/email/resend.js  (repurposed as transport.js or just edit in place)
+import nodemailer from "nodemailer";
 
-export const FROM_ADDRESS = process.env.EMAIL_FROM ?? "onboarding@resend.dev";
-export const TO_ADDRESS   = process.env.EMAIL_TO ?? "";
+export const TO_ADDRESS = process.env.EMAIL_TO ?? "";
 
-let _resend = null;
-
-export function getResend() {
-  if (!process.env.RESEND_API_KEY) {
-    throw new Error("Missing RESEND_API_KEY environment variable");
+export function getTransporter() {
+  if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
+    throw new Error("Missing GMAIL_USER or GMAIL_APP_PASSWORD");
   }
-  if (!TO_ADDRESS) {
-    throw new Error("Missing EMAIL_TO environment variable");
-  }
-  if (!_resend) {
-    _resend = new Resend(process.env.RESEND_API_KEY);
-  }
-  return _resend;
+  return nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_APP_PASSWORD,
+    },
+  });
 }
