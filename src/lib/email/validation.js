@@ -1,4 +1,4 @@
-/** Validates an email string. Returns an error message or null. */
+
 export function validateEmail(email) {
   if (!email || typeof email !== "string") return "Email is required.";
   const trimmed = email.trim();
@@ -8,7 +8,6 @@ export function validateEmail(email) {
   return null;
 }
 
-/** Validates a plain-text message. Returns an error message or null. */
 export function validateMessage(message, { minLength = 10, maxLength = 5000 } = {}) {
   if (!message || typeof message !== "string") return "Message is required.";
   const trimmed = message.trim();
@@ -17,26 +16,23 @@ export function validateMessage(message, { minLength = 10, maxLength = 5000 } = 
   return null;
 }
 
-/** Sanitises a string: strips HTML tags and trims whitespace. */
 export function sanitize(value) {
   if (typeof value !== "string") return "";
   return value.replace(/<[^>]*>/g, "").trim();
 }
 
-/** Detects obvious spam patterns. Returns true if the content looks like spam. */
 export function isSpam(fields) {
   const combined = Object.values(fields).join(" ").toLowerCase();
 
   const spamPatterns = [
     /\b(viagra|cialis|casino|lottery|winner|click here|free money|earn \$)\b/i,
-    /https?:\/\/[^\s]{3,}.*https?:\/\/[^\s]{3,}/,   // multiple links
-    /(.)\1{8,}/,                                      // excessive repeated chars
+    /https?:\/\/[^\s]{3,}.*https?:\/\/[^\s]{3,}/,   
+    /(.)\1{8,}/,                                      
   ];
 
   return spamPatterns.some((pattern) => pattern.test(combined));
 }
 
-/** Rate-limit helper (in-memory, resets on cold start — use Redis/KV for prod). */
 const ipBuckets = new Map();
 
 export function isRateLimited(ip, { windowMs = 60_000, maxRequests = 5 } = {}) {

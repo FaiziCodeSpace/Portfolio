@@ -80,12 +80,11 @@ function Navbar() {
     }
   };
 
-  // true = drawer is fully open and not animating out
   const drawerSlideIn = menuOpen && !isClosing;
 
   return (
     <>
-      {/* ── Navbar ── */}
+      
       <nav className="fixed top-0 inset-x-0 z-50 md:mx-8 flex justify-between items-center px-6 md:px-10 py-4 md:py-6 rounded-b-[40px] bg-secondary/80 backdrop-blur-md shadow-lg border border-white/10">
         <Link href="/" onClick={() => menuOpen && closeMenu()}>
           <img src="/Logo/Logo-dark.svg" alt="Company Logo" className="h-7 md:h-8 w-auto block dark:hidden" />
@@ -109,19 +108,13 @@ function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          {/*
-            Theme toggle: hidden on mobile when menu is open.
-            Using a ref-based approach AND inline style to guarantee it works
-            regardless of Tailwind purging. The `hidden` class alone was being
-            overridden by Tailwind's sm:block on the parent chain.
-          */}
+          
           <div
             className="hidden sm:block"
           >
             <ThemeToggle />
           </div>
 
-          {/* Burger — no animation on the bars since it sits behind the drawer */}
           <button
             onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
             aria-label="Toggle menu"
@@ -134,11 +127,6 @@ function Navbar() {
         </div>
       </nav>
 
-      {/*
-        ── Backdrop ──
-        Always in the DOM. Opacity transitions in/out.
-        All styling via inline style to avoid Tailwind purge issues.
-      */}
       <div
         onClick={() => menuOpen && closeMenu()}
         className="fixed inset-0 z-40 sm:hidden"
@@ -153,13 +141,6 @@ function Navbar() {
         }}
       />
 
-      {/*
-        ── Slide-in Drawer ──
-        ALWAYS in the DOM — never conditionally rendered.
-        This is the only reliable way to animate both open AND close in React.
-        When closed: translateX(100%) moves it off-screen, visibility:hidden
-        removes it from tab order and prevents ghost clicks.
-      */}
       <div
         ref={drawerRef}
         className="fixed top-0 right-0 z-50 h-full w-[75vw] max-w-xs flex flex-col sm:hidden"
@@ -167,7 +148,7 @@ function Navbar() {
           transform: drawerSlideIn ? "translateX(0)" : "translateX(100%)",
           transition: "transform 320ms cubic-bezier(0.32, 0, 0.15, 1)",
           visibility: menuOpen ? "visible" : "hidden",
-          // Rich glassmorphism — all inline to bypass Tailwind entirely
+          
           background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
           backgroundColor: "rgba(15, 15, 20, 0.6)",
           backdropFilter: "blur(40px) saturate(200%) brightness(110%)",
@@ -176,7 +157,7 @@ function Navbar() {
           boxShadow: "-8px 0 32px rgba(0,0,0,0.4), inset 1px 0 0 rgba(255,255,255,0.08)",
         }}
       >
-        {/* Decorative top shimmer line */}
+        
         <div style={{
           position: "absolute",
           top: 0, left: 0, right: 0,
@@ -184,7 +165,6 @@ function Navbar() {
           background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
         }} />
 
-        {/* Drawer header */}
         <div
           className="flex items-center justify-between px-6 py-5"
           style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
@@ -207,7 +187,6 @@ function Navbar() {
           </button>
         </div>
 
-        {/* Nav links — stagger in on open, instant reset on close */}
         <nav className="flex flex-col gap-1 px-4 py-6 flex-1">
           {navLinks.map(({ id, label }, i) => (
             <a
@@ -232,7 +211,6 @@ function Navbar() {
           ))}
         </nav>
 
-        {/* Footer */}
         <div
           className="px-6 py-5 flex items-center justify-between"
           style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}

@@ -18,7 +18,6 @@ export function ContactModal({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Client-side validation
     const errs = {};
     if (!form.email.trim())   errs.email   = "Email is required.";
     if (!form.message.trim()) errs.message = "Message is required.";
@@ -80,7 +79,6 @@ export function ContactModal({ onClose }) {
 
       <div className="contact-modal-wrap">
 
-        {/* LEFT PANEL */}
         <div className="contact-modal-left">
           {[
             { anim: "orbit1 7s linear infinite", size: 7, color: "rgba(9,9,11,0.25)" },
@@ -119,7 +117,6 @@ export function ContactModal({ onClose }) {
           <p style={{ fontSize: "12px", color: "rgba(9,9,11,0.4)", margin: 0, marginTop: "2rem", position: "relative", zIndex: 1 }}>We read every message personally.</p>
         </div>
 
-        {/* RIGHT PANEL */}
         <div className="contact-modal-right">
           {success ? (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", padding: "3rem 2.5rem", textAlign: "center", gap: "1.25rem" }}>
@@ -169,7 +166,6 @@ export function ContactModal({ onClose }) {
                 {errors.message && <span style={{ fontSize: "12px", color: "var(--color-brand)", fontWeight: 500 }}>{errors.message}</span>}
               </div>
 
-              {/* Server-side error */}
               {submitError && (
                 <div style={{ padding: "10px 14px", borderRadius: "8px", backgroundColor: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)" }}>
                   <p style={{ margin: 0, fontSize: "13px", color: "#f87171" }}>{submitError}</p>

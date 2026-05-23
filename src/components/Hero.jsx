@@ -12,10 +12,9 @@ function HeroSection({ hidden = false }) {
     <section className="relative overflow-hidden" id='hero'>
       <DotBg className="flex flex-col items-center pt-32 sm:pt-40 lg:pt-50 pb-10 min-h-screen">
 
-        {/* ── Heading block ── */}
         <div className="relative flex flex-col top-30 sm:top-20 md:top-10 items-center leading-none w-full">
           <h1
-            className="flex font-bebas leading-none text-text-primary"
+            className="flex font-bebas leading-none text-text-primary" 
             style={{ fontSize: 'clamp(70px, 14vw, 180px)' }}
           >
             <span className="flex flex-col text-right leading-[0.82]">
@@ -55,7 +54,6 @@ function HeroSection({ hidden = false }) {
           </p>
         </div>
 
-        {/* ── CTA ── */}
         <div className="relative flex items-center justify-center mt-40 right-[-25%] md:left-0 md:mt-10">
           <motion.button
             onClick={() => setContactOpen(true)}
@@ -73,7 +71,6 @@ function HeroSection({ hidden = false }) {
             <div className="w-7 h-7 md:w-10 md:h-10 bg-[#FF0000] rounded-full shrink-0" />
             <p className="whitespace-nowrap">CHAT WITH FAIZAN</p>
 
-            {/* Pulsing availability dot */}
             <div
               className={`${hidden ? 'hidden' : 'block'} absolute w-3 h-3 sm:w-4 sm:h-4 bg-[#FE6E6E] border-[2px] sm:border-[3px] border-foreground rounded-full -right-0 -top-0`}
             >
@@ -86,7 +83,6 @@ function HeroSection({ hidden = false }) {
           </motion.button>
         </div>
 
-        {/* ── Skills marquee ── */}
         <div className="mt-auto pt-16 w-full">
           <SkillsMarquee />
         </div>

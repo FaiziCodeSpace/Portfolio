@@ -82,7 +82,7 @@ function CaseStudy() {
   return (
     <section className="case-study-section">
       <div>
-        {/* Header */}
+        
         <div className="case-study-header">
           <h2 className="text-brand font-bold case-study-eyebrow">OUR PROJECTS</h2>
           <h2 className="text-muted font-bebas font-medium case-study-heading">
@@ -90,9 +90,8 @@ function CaseStudy() {
           </h2>
         </div>
 
-        {/* Body */}
         <div className="case-study-body font-satoshi pr-6 md:pr-0 mt-5 md:mt-0">
-          {/* Left Content */}
+          
           <div
             key={animKey}
             className="case-study-left"
@@ -100,10 +99,9 @@ function CaseStudy() {
               animation: `slideInContent 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
             }}
           >
-            {/* Title */}
+            
             <p className="font-bold case-study-title">{project.title}</p>
 
-            {/* Tags */}
             <div className="case-study-tags">
               {project.tags.map((tag) => (
                 <p
@@ -116,7 +114,6 @@ function CaseStudy() {
               ))}
             </div>
 
-            {/* Description & Stats */}
             <div className="w-full ">
               <p className="case-study-desc">{project.description}</p>
               <div className="case-study-stats">
@@ -143,9 +140,8 @@ function CaseStudy() {
             </div>
           </div>
 
-          {/* Right: Image with overlay nav */}
           <div className="case-study-image-wrap ">
-            {/* Outgoing image */}
+            
             {prev !== null && (
               <img
                 key={`img-out-${prev}`}
@@ -164,7 +160,6 @@ function CaseStudy() {
               />
             )}
 
-            {/* Incoming image */}
             <img
               key={`img-in-${current}`}
               src={project.image}
@@ -181,7 +176,6 @@ function CaseStudy() {
               }}
             />
 
-            {/* Dark gradient overlay */}
             <div
               style={{
                 position: "absolute",
@@ -196,7 +190,6 @@ function CaseStudy() {
               }}
             />
 
-            {/* Prev / Next buttons */}
             <div
               style={{
                 position: "absolute",
@@ -258,7 +251,6 @@ function CaseStudy() {
               ))}
             </div>
 
-            {/* Keyframe styles */}
             <style>{`
               /* ── Layout ── */
               .case-study-section {

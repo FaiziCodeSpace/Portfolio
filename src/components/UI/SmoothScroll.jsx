@@ -13,7 +13,6 @@ export default function SmoothScroll({ children }) {
       touchMultiplier: 2,
     });
 
-    // Let Lenis handle anchor clicks
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener('click', (e) => {
         e.preventDefault();

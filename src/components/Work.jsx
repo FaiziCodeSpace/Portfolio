@@ -97,16 +97,12 @@ const workCard = [
   },
 ]
 
-/* ─────────────────────────────────────────
-   MODAL
-───────────────────────────────────────── */
 function Modal({ card, index, onClose }) {
   const [activeImg, setActiveImg]   = useState(0)
   const [closing, setClosing]       = useState(false)
   const [contentKey, setContentKey] = useState(0)
   const [isMd, setIsMd]             = useState(false)
 
-  /* detect md breakpoint */
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px)')
     setIsMd(mq.matches)
@@ -213,7 +209,6 @@ function Modal({ card, index, onClose }) {
         }
       `}</style>
 
-      {/* BACKDROP */}
       <div
         className='m-backdrop fixed inset-0 z-[200] flex items-end md:items-center justify-center'
         style={{
@@ -224,7 +219,7 @@ function Modal({ card, index, onClose }) {
         }}
         onClick={handleBackdrop}
       >
-        {/* PANEL */}
+        
         <div
           className={isMd ? 'm-panel-desktop' : 'm-panel-mobile'}
           style={{
@@ -240,9 +235,6 @@ function Modal({ card, index, onClose }) {
           }}
         >
 
-          {/* ══════════════════════════════
-              LEFT — images (landscape)
-          ══════════════════════════════ */}
           <div style={{
             position: 'relative',
             width: isMd ? '64%' : '100%',
@@ -253,14 +245,13 @@ function Modal({ card, index, onClose }) {
             height: isMd ? '100%' : 'auto', maxHeight: isMd ? undefined : '45dvh',
           }}>
 
-            {/* main image — fills remaining height */}
             <div style={{
               position: 'relative',
               flex: 1,
               minHeight: isMd ? 0 : 220,
               overflow: 'hidden',
             }}>
-              {/* mobile uses aspect ratio box */}
+              
               {!isMd && (
                 <div style={{ paddingTop: '56.25%', position: 'relative' }}>
                   {card.images.map((img, i) => (
@@ -277,7 +268,7 @@ function Modal({ card, index, onClose }) {
                   ))}
                 </div>
               )}
-              {/* desktop fills flex height */}
+              
               {isMd && card.images.map((img, i) => (
                 <img key={i} src={img.src} alt={img.title} draggable={false}
                   className='m-img-crossfade'
@@ -291,18 +282,16 @@ function Modal({ card, index, onClose }) {
                 />
               ))}
 
-              {/* bottom gradient */}
               <div style={{
                 position:'absolute', inset:'auto 0 0 0', height:96, pointerEvents:'none',
                 background:'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',
               }}/>
-              {/* top gradient */}
+              
               <div style={{
                 position:'absolute', inset:'0 0 auto 0', height:72, pointerEvents:'none',
                 background:'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)',
               }}/>
 
-              {/* tag */}
               <div style={{
                 position:'absolute', top:16, left:16, zIndex:10,
                 background:'var(--color-brand)', color:'#000',
@@ -312,7 +301,6 @@ function Modal({ card, index, onClose }) {
                 {card.tag}
               </div>
 
-              {/* close — mobile only */}
               {!isMd && (
                 <button onClick={triggerClose} aria-label='Close'
                   className='m-close'
@@ -330,7 +318,6 @@ function Modal({ card, index, onClose }) {
                 </button>
               )}
 
-              {/* arrows */}
               {card.images.length > 1 && (<>
                 <button onClick={prevImg} aria-label='Previous' className='m-arrow'
                   style={{
@@ -358,7 +345,6 @@ function Modal({ card, index, onClose }) {
                 </button>
               </>)}
 
-              {/* dots */}
               {card.images.length > 1 && (
                 <div style={{
                   position:'absolute', bottom:14, left:'50%', transform:'translateX(-50%)', zIndex:10,
@@ -378,7 +364,6 @@ function Modal({ card, index, onClose }) {
                 </div>
               )}
 
-              {/* counter */}
               <div style={{
                 position:'absolute', bottom:14, right:14, zIndex:10,
                 fontSize:10, fontWeight:600, padding:'4px 9px', borderRadius:9999,
@@ -389,7 +374,6 @@ function Modal({ card, index, onClose }) {
               </div>
             </div>
 
-            {/* thumbnail strip */}
             {card.images.length > 1 && (
               <div className='m-thumbstrip' style={{
                 display:'flex', gap:8, padding:'10px 14px', flexShrink:0,
@@ -420,15 +404,11 @@ function Modal({ card, index, onClose }) {
             )}
           </div>
 
-          {/* ══════════════════════════════
-              RIGHT — content
-          ══════════════════════════════ */}
           <div className='m-right' style={{
             flex:1, display:'flex', flexDirection:'column',
             overflowY:'auto', overscrollBehavior:'contain', minWidth:0,
           }}>
 
-            {/* header */}
             <div style={{
               padding: isMd ? '28px 28px 20px' : '20px 20px 16px',
               borderBottom:'1px solid rgba(255,255,255,0.07)',
@@ -436,7 +416,7 @@ function Modal({ card, index, onClose }) {
               display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:12,
             }}>
               <div>
-                {/* phase dots */}
+                
                 <div style={{ display:'flex', alignItems:'center', gap:6, marginBottom:10 }}>
                   {workCard.map((_, i) => (
                     <div key={i} className='m-dot' style={{
@@ -458,7 +438,6 @@ function Modal({ card, index, onClose }) {
                 </h2>
               </div>
 
-              {/* close — desktop only */}
               {isMd && (
                 <button onClick={triggerClose} aria-label='Close'
                   className='m-close'
@@ -476,12 +455,11 @@ function Modal({ card, index, onClose }) {
               )}
             </div>
 
-            {/* dynamic content — animates on image change */}
             <div key={contentKey} className='m-content-in' style={{
               padding: isMd ? '22px 28px 0' : '18px 20px 0',
               flexShrink:0,
             }}>
-              {/* image title */}
+              
               <div style={{ display:'flex', alignItems:'center', gap:10, marginBottom:12 }}>
                 <div style={{
                   width:3, height:20, borderRadius:9999, flexShrink:0,
@@ -492,7 +470,6 @@ function Modal({ card, index, onClose }) {
                 </h3>
               </div>
 
-              {/* description */}
               <p style={{
                 fontSize: isMd ? 14 : 13, lineHeight:1.8, fontWeight:300,
                 color:'rgba(255,255,255,0.58)', margin:'0 0 14px',
@@ -500,7 +477,6 @@ function Modal({ card, index, onClose }) {
                 {current.description}
               </p>
 
-              {/* amber callout */}
               <div style={{
                 display:'flex', alignItems:'flex-start', gap:10,
                 background:'rgba(254,175,58,0.07)', border:'1px solid rgba(254,175,58,0.2)',
@@ -516,13 +492,11 @@ function Modal({ card, index, onClose }) {
               </div>
             </div>
 
-            {/* divider */}
             <div style={{
               height:1, background:'rgba(255,255,255,0.06)',
               margin: isMd ? '20px 28px 0' : '16px 20px 0', flexShrink:0,
             }}/>
 
-            {/* phase overview — static */}
             <div style={{
               padding: isMd ? '18px 28px 0' : '16px 20px 0',
               flexShrink:0,
@@ -557,10 +531,8 @@ function Modal({ card, index, onClose }) {
               </div>
             </div>
 
-            {/* spacer */}
             <div style={{ flex:1, minHeight:20 }}/>
 
-            {/* CTA */}
             <div style={{
               display:'flex', alignItems:'center', justifyContent:'space-between', gap:12,
               padding: isMd ? '16px 28px' : '14px 20px',
@@ -599,16 +571,13 @@ function Modal({ card, index, onClose }) {
               </a>
             </div>
 
-          </div>{/* end right */}
-        </div>{/* end panel */}
-      </div>{/* end backdrop */}
+          </div>
+        </div>
+      </div>
     </>
   )
 }
 
-/* ─────────────────────────────────────────
-   WORK — main section (unchanged)
-───────────────────────────────────────── */
 function Work() {
   const trackRef   = useRef(null)
   const isDragging = useRef(false)

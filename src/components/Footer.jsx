@@ -10,11 +10,11 @@ export default function Footer() {
 
     return (
         <footer className="w-full bg-card border-t border-border flex flex-col mt-[clamp(80px,12vw,350px)]">
-            {/* Top brand border */}
+            
             <div className="w-full h-1.5 bg-brand" />
 
             <div className="w-full px-8 sm:px-16 lg:px-32 py-14 flex flex-col gap-16 lg:gap-24">
-                {/* Top row */}
+                
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">
                     <h2
                         className="text-brand font-bebas font-medium leading-none

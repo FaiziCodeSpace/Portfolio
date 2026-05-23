@@ -1,6 +1,4 @@
-// src/lib/email/emailTemplates.js
 
-// ─── Design tokens (mirrored from theme) ──────────────────────────────────
 const C = {
   bg:          "#ffffff",
   bgDark:      "#09090b",
@@ -12,8 +10,6 @@ const C = {
   border:      "#e4e4e7",
   card:        "#ffffff",
 };
-
-// ─── Base wrapper ──────────────────────────────────────────────────────────
 
 function base(title, preheader, bodyHtml) {
   return `<!DOCTYPE html>
@@ -111,8 +107,6 @@ function base(title, preheader, bodyHtml) {
 </html>`;
 }
 
-// ─── Field row ─────────────────────────────────────────────────────────────
-
 function field(label, value) {
   if (!value) return "";
   return `
@@ -126,8 +120,6 @@ function field(label, value) {
   </tr>`;
 }
 
-// ─── Message / notes block ─────────────────────────────────────────────────
-
 function messageBlock(heading, text) {
   if (!text) return "";
   return `
@@ -137,11 +129,6 @@ function messageBlock(heading, text) {
   </div>`;
 }
 
-// ─── Contact form template ─────────────────────────────────────────────────
-
-/**
- * @param {{ name?: string, email: string, subject?: string, message: string }} data
- */
 export function contactEmailHtml({ name, email, subject, message }) {
   const bodyHtml = `
     <!-- Heading -->
@@ -168,11 +155,6 @@ export function contactEmailHtml({ name, email, subject, message }) {
   );
 }
 
-// ─── Pricing / booking template ───────────────────────────────────────────
-
-/**
- * @param {{ plan: object, name?: string, email: string, phone?: string, website?: string, date?: string, time?: string, message?: string }} data
- */
 export function bookingEmailHtml({ plan, name, email, phone, website, date, time, message }) {
   const slot = [date, time].filter(Boolean).join(" at ") || null;
 

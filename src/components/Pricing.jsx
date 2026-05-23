@@ -88,8 +88,6 @@ function Modal({ plan, onClose }) {
 
   const handle = (e) => { setForm((p) => ({ ...p, [e.target.name]: e.target.value })); setError(""); };
 
-
-
   const submit = async (e) => {
     e.preventDefault();
     if (!form.email.trim()) { setError("Email is required."); return; }
@@ -242,9 +240,8 @@ function Modal({ plan, onClose }) {
 
       <div className="modal-wrap">
 
-        {/* ── LEFT PANEL (md+ only) ── */}
         <div className="modal-left">
-          {/* Orbiting dots */}
+          
           {[
             { anim: "orbit1 7s linear infinite", size: 7, color: "rgba(9,9,11,0.25)" },
             { anim: "orbit2 5s linear infinite", size: 5, color: "rgba(9,9,11,0.18)" },
@@ -259,7 +256,6 @@ function Modal({ plan, onClose }) {
             }} />
           ))}
 
-          {/* Pulse rings */}
           {[{ s: "180px", d: "0s" }, { s: "240px", d: "0.8s" }, { s: "300px", d: "1.6s" }].map((r, i) => (
             <div key={i} style={{
               position: "absolute", top: "50%", left: "50%",
@@ -273,7 +269,7 @@ function Modal({ plan, onClose }) {
           ))}
 
           <div style={{ position: "relative", zIndex: 1 }}>
-            {/* Close btn — desktop only (inside left panel) */}
+            
             <button
               onClick={onClose}
               className="modal-close-desktop"
@@ -287,7 +283,6 @@ function Modal({ plan, onClose }) {
               <X size={14} />
             </button>
 
-            {/* Floating badge */}
             <div style={{
               display: "inline-flex", alignItems: "center", gap: "6px",
               background: "rgba(9,9,11,0.1)", borderRadius: "999px",
@@ -334,7 +329,6 @@ function Modal({ plan, onClose }) {
           </p>
         </div>
 
-        {/* ── RIGHT PANEL ── */}
         <div className="modal-right">
           {submitted ? (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", padding: "3rem 2.5rem", textAlign: "center", gap: "1.25rem" }}>
@@ -354,7 +348,6 @@ function Modal({ plan, onClose }) {
           ) : (
             <form onSubmit={submit} style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "1.1rem", boxSizing: "border-box" }}>
 
-              {/* Header row: title + close btn (mobile only) */}
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
                 <div>
                   <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--color-text-primary)", margin: "0 0 4px" }}>Book a call</h3>

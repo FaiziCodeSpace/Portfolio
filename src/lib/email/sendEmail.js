@@ -1,4 +1,4 @@
-// src/lib/email/sendEmail.js
+
 import { getTransporter, TO_ADDRESS } from "./resend.js";
 
 export async function sendEmail({ subject, html, replyTo }) {

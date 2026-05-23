@@ -13,7 +13,7 @@ function DotBg({ children, className = '' }) {
   const FLEE_DIST = 25
 
   function getDotColor() {
-    // Reads --color-muted from the current theme at runtime
+    
     return getComputedStyle(document.documentElement)
       .getPropertyValue('--color-muted')
       .trim()
@@ -64,7 +64,6 @@ function DotBg({ children, className = '' }) {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       const mouse = mouseRef.current
 
-      // Re-read color each frame so theme transitions are smooth
       const hex = getDotColor()
       const { r, g, b } = hexToRgb(hex)
 
@@ -85,12 +84,11 @@ function DotBg({ children, className = '' }) {
         d.x = lerp(d.x, tx, 0.12)
         d.y = lerp(d.y, ty, 0.12)
 
-        // Opacity based on actual current position
         const adx = d.x - mouse.x
         const ady = d.y - mouse.y
         const actualDist = Math.sqrt(adx * adx + ady * ady)
         const proximity = Math.max(0, 1 - actualDist / FLEE_RADIUS)
-        // Resting: 0.35 — active: 1.0
+        
         const opacity = 0.35 + proximity * 0.65
 
         ctx.beginPath()

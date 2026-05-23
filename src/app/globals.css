@@ -7,17 +7,17 @@ html {
 }
 
 section[id] {
-    scroll-margin-top: 80px; /* mobile */
+    scroll-margin-top: 80px; 
 }
 
 @media (min-width: 768px) {
     section[id] {
-        scroll-margin-top: 100px; /* desktop */
+        scroll-margin-top: 100px; 
     }
 }
 
 @theme inline{
-  /* Fonts */
+  
   --font-satoshi: var(--font-satoshi-next), ui-sans-serif, system-ui;
   --font-bebas: var(--font-bebas-next), display;
 }
@@ -47,6 +47,28 @@ section[id] {
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e89a25;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-brand) var(--color-secondary);
 }
 
 * {

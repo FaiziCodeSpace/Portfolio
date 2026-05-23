@@ -1,4 +1,4 @@
-// src/lib/email/resend.js  (repurposed as transport.js or just edit in place)
+
 import nodemailer from "nodemailer";
 
 export const TO_ADDRESS = process.env.EMAIL_TO ?? "";

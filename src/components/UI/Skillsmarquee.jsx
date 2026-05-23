@@ -1,5 +1,5 @@
 import React from "react";
-// Import entire icon sets as objects
+
 import * as SiIcons from "react-icons/si";
 import * as TbIcons from "react-icons/tb";
 
@@ -21,7 +21,7 @@ const defaultSkills = [
 ];
 
 function SkillItem({ item }) {
-  // Dynamically select the icon from the correct library object
+  
   const IconLib = item.lib === "si" ? SiIcons : TbIcons;
   const IconComponent = IconLib[item.name];
 
@@ -65,7 +65,7 @@ export default function SkillsMarquee({ items = defaultSkills, speed = 30 }) {
       `}</style>
 
       <div className="relative w-full overflow-hidden bg-background py-5 opacity-60">
-        {/* Visual Fades */}
+        
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-28 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-28 bg-gradient-to-l from-background to-transparent" />
 

@@ -2,22 +2,6 @@
 
 import { useState, useCallback } from "react";
 
-/**
- * Generic form submission hook.
- *
- * @param {string} endpoint   - API route path, e.g. "/api/contact"
- * @param {object} [options]
- * @param {() => void} [options.onSuccess]   - called after a successful submission
- * @param {() => void} [options.onError]     - called after a failed submission
- *
- * @returns {{
- *   loading: boolean,
- *   error: string | null,
- *   success: boolean,
- *   submit: (data: object) => Promise<void>,
- *   reset: () => void,
- * }}
- */
 export function useFormSubmit(endpoint, { onSuccess, onError } = {}) {
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState(null);

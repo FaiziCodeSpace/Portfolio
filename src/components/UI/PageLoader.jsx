@@ -10,7 +10,6 @@ export default function PageLoader() {
   const [mounted, setMounted] = useState(false)
   const { resolvedTheme } = useTheme()
 
-  // Wait for client mount before reading theme — prevents SSR mismatch
   useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
@@ -47,7 +46,6 @@ export default function PageLoader() {
     }
   }, [])
 
-  // Always render with light theme values until mounted — avoids hydration diff
   const isDark = mounted && resolvedTheme === "dark"
 
   return (
@@ -70,7 +68,7 @@ export default function PageLoader() {
             gap: "2.5rem",
           }}
         >
-          {/* Logo — only render once we know the theme */}
+          
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -85,7 +83,6 @@ export default function PageLoader() {
             )}
           </motion.div>
 
-          {/* Bar track */}
           <div
             style={{
               width: "clamp(180px, 28vw, 320px)",
@@ -107,7 +104,6 @@ export default function PageLoader() {
             />
           </div>
 
-          {/* Percentage */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
