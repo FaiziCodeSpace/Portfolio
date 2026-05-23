@@ -21,7 +21,7 @@ export default function Footer() {
                         text-5xl sm:text-6xl lg:text-7xl
                         max-w-xl"
                     >
-                        Let's work with us
+                        Let's Kick this off
                     </h2>
 
                     <p

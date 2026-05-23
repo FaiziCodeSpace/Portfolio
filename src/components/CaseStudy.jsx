@@ -14,7 +14,7 @@ const projects = [
       "A full-stack MERN e-commerce platform built across three interconnected portals. The public storefront showcases certified natural gemstones with a trust-focused UI, secure checkout, and full input validation. The investor portal lets approved investors fund specific listings and automatically receive profit-share payouts upon sale. The CMS-powered admin panel gives full control over products, taxonomy, investor approvals, payout requests, testimonials, orders, and bargainer applications — all from a single real-time dashboard.",
     hours: "120+",
     pages: "40+",
-    liveUrl: "https://khakigemstone.com",
+    liveUrl: "https://github.com/FaiziCodeSpace/khaki-gemstone.git",
     image: "/images/Khakigemstone/Image-1.jpg",
   },
   {
@@ -29,7 +29,7 @@ const projects = [
       "A dual-portal web app built for the car dealership industry. The stamp portal lets users upload a stamp paper, fill a dynamic template, and auto-generate a formatted PDF via jsPDF — with an Urdu OCR API to read and parse Urdu-language stamp documents, eliminating manual PDF editing entirely. The AgentHub portal lets car bargainers register, get admin-approved, then browse a live list of nearby agents. One tap opens WhatsApp with the bargainer's GPS coordinates pre-embedded, so the agent can navigate directly via Google Maps — no back-and-forth needed.",
     hours: "80+",
     pages: "20+",
-    liveUrl: "https://khakigemstone.com",
+    liveUrl: "https://github.com/FaiziCodeSpace/khaki-gemstone.git",
     image: "/images/Agenthub/Image-1.jpg",
   },
   {
@@ -43,8 +43,8 @@ const projects = [
     description:
       "A fully custom developer portfolio built with Next.js and Tailwind CSS, featuring a component-driven architecture across sections including Hero, Services, Work, Case Studies, Pricing, Testimonials, and Footer. Includes a light/dark theme system with a custom Theme Provider, a skills marquee, dot-pattern backgrounds, and fluid responsive typography using locally hosted Satoshi fonts. Every section is designed from scratch — no UI kits, no templates.",
     hours: "20+",
-    pages: "2",
-    liveUrl: "#",
+    components: "15+",
+    liveUrl: "https://github.com/FaiziCodeSpace/Portfolio.git",
     image: "/images/Portfolio/Image-1.jpg",
   },
 
@@ -125,18 +125,18 @@ function CaseStudy() {
                   <h2 className="stat-value">{project.hours} Hours</h2>
                 </div>
                 <div>
-                  <p className="stat-label">Pages Created</p>
-                  <h2 className="stat-value">{project.pages}</h2>
+                  <p className="stat-label">{project?.components ? "Components Created" : "Pages Created"}</p>
+                  <h2 className="stat-value">{project?.pages}{project?.components}</h2>
                 </div>
                 <div>
-                  <p className="stat-label">Visit our website</p>
+                  <p className="stat-label">Visit Git Repo</p>
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="stat-value hover:underline cursor-pointer block"
                   >
-                    Visit Live
+                    Visit Now
                   </a>
                 </div>
               </div>
@@ -157,9 +157,8 @@ function CaseStudy() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  animation: `imgSlideOut${
-                    direction === "next" ? "Left" : "Right"
-                  } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+                  animation: `imgSlideOut${direction === "next" ? "Left" : "Right"
+                    } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
                   zIndex: 1,
                 }}
               />
@@ -176,9 +175,8 @@ function CaseStudy() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                animation: `imgSlideIn${
-                  direction === "next" ? "Right" : "Left"
-                } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+                animation: `imgSlideIn${direction === "next" ? "Right" : "Left"
+                  } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
                 zIndex: 2,
               }}
             />

@@ -4,39 +4,34 @@ import { useRef, useState, useEffect, useCallback } from "react";
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 const COPIES = 7;                      // total cloned copies of the list
-const MID    = Math.floor(COPIES / 2); // = 3  (the "real" center copy)
+const MID = Math.floor(COPIES / 2); // = 3  (the "real" center copy)
 
 // ─── Component ────────────────────────────────────────────────────────────────
 function ClientsExperiences() {
-
     const testimonials = [
         {
             CompanyName: "KhakiGemstone",
-            review: "This Agency helped me to the end, I never knew I would get my project done so fast and so perfect. They were connected with me throughout the whole process, showing me everything before moving to the next step.",
+            review: "Honestly, working with Faizan was a pleasant surprise. The project wrapped up faster than I expected, and the quality didn't take a hit because of it. He kept me in the loop the whole time and always gave me a heads up before anything major happened.",
             name: "Ayub Khan",
             position: "CEO of KhakiGemstone",
-            logo: '/images/test.jpg'
         },
         {
-            CompanyName: "StoneCraft Ltd",
-            review: "Professional, fast, and highly skilled team. They understood our requirements clearly and delivered exactly what we needed without delays.",
-            name: "Hassan Raza",
-            position: "Managing Director",
-            logo: '/images/test.jpg'
+            CompanyName: "Iqra School System",
+            review: "Faizan got the job done without any fuss. He communicated well, stuck to the timeline, and delivered exactly what we asked for. No surprises, just solid, reliable work.",
+            name: "Qaisar Niaz",
+            position: "Administration of IT",
         },
         {
-            CompanyName: "GemWorld Traders",
-            review: "The communication was excellent and the quality of work exceeded expectations. I would definitely recommend them to anyone looking for reliable services.",
-            name: "Ali Sher",
-            position: "Founder",
-            logo: '/images/test.jpg'
+            CompanyName: "E-Stamp Agenthub",
+            review: "What stood out most was how much care he put into the details. Faizan was easy to reach, dependable, and made the whole development experience feel smooth and straightforward.",
+            name: "Moiz Hassan",
+            position: "Manager",
         },
         {
-            CompanyName: "Precious Exports",
-            review: "From design to deployment, everything was handled smoothly. The team was responsive and made sure every detail was perfect.",
-            name: "Usman Tariq",
-            position: "Operations Head",
-            logo: '/images/test.jpg'
+            CompanyName: "ODA Agency",
+            review: "Faizan took care of everything from planning all the way to deployment. His creativity and professionalism really showed in the final product. It was genuinely a step above what we anticipated.",
+            name: "Meher Ali",
+            position: "CEO",
         }
     ];
 
@@ -54,31 +49,31 @@ function ClientsExperiences() {
     const [isDragging, setIsDragging] = useState(false);
 
     // ── Refs (mutation without re-render) ─────────────────────────────────────
-    const containerRef    = useRef(null);
-    const trackRef        = useRef(null);
+    const containerRef = useRef(null);
+    const trackRef = useRef(null);
 
     // current pixel offset of the track
-    const offsetRef       = useRef(0);
+    const offsetRef = useRef(0);
     // which global index (0‥TOTAL-1) is currently centered
-    const gIdxRef         = useRef(MID * COUNT + 1); // start: copy 3, card index 1
+    const gIdxRef = useRef(MID * COUNT + 1); // start: copy 3, card index 1
 
     // drag tracking
-    const dragStartXRef   = useRef(0);
+    const dragStartXRef = useRef(0);
     const dragStartOffRef = useRef(0); // offset at the moment of pointerdown
-    const draggingRef     = useRef(false);
+    const draggingRef = useRef(false);
 
     // raf + snap
-    const rafRef          = useRef(null);
-    const snapTargetRef   = useRef(null);
+    const rafRef = useRef(null);
+    const snapTargetRef = useRef(null);
 
     // ── Geometry helpers ──────────────────────────────────────────────────────
     const getStepAndCenter = useCallback(() => {
-        const el   = containerRef.current;
+        const el = containerRef.current;
         const card = trackRef.current?.querySelector("[data-card]");
         if (!el || !card) return { step: 300, center: 0, cardW: 280 };
-        const gap    = parseFloat(window.getComputedStyle(trackRef.current).columnGap) || 24;
-        const cardW  = card.offsetWidth;
-        const step   = cardW + gap;
+        const gap = parseFloat(window.getComputedStyle(trackRef.current).columnGap) || 24;
+        const cardW = card.offsetWidth;
+        const step = cardW + gap;
         const center = (el.offsetWidth - cardW) / 2;
         return { step, center, cardW };
     }, []);
@@ -100,10 +95,10 @@ function ClientsExperiences() {
         const hi = (COPIES - 2) * COUNT - 1;
         if (g < lo || g > hi) {
             const realCard = ((g % COUNT) + COUNT) % COUNT;
-            const newG     = MID * COUNT + realCard;
+            const newG = MID * COUNT + realCard;
             const { step } = getStepAndCenter();
-            const diff     = newG - g;
-            gIdxRef.current    = newG;
+            const diff = newG - g;
+            gIdxRef.current = newG;
             offsetRef.current -= diff * step;          // compensate pixel-exactly
             if (snapTargetRef.current !== null) {
                 snapTargetRef.current -= diff * step;  // keep snap target aligned too
@@ -118,7 +113,7 @@ function ClientsExperiences() {
         if (target === null) return;
         const diff = target - offsetRef.current;
         if (Math.abs(diff) < 0.4) {
-            offsetRef.current     = target;
+            offsetRef.current = target;
             snapTargetRef.current = null;
             applyOffset(offsetRef.current);
             rebase();
@@ -131,9 +126,9 @@ function ClientsExperiences() {
 
     const snapTo = useCallback((gIdx) => {
         cancelAnimationFrame(rafRef.current);
-        gIdxRef.current       = gIdx;
+        gIdxRef.current = gIdx;
         snapTargetRef.current = offsetForGIdx(gIdx);
-        rafRef.current        = requestAnimationFrame(snapLoop);
+        rafRef.current = requestAnimationFrame(snapLoop);
     }, [offsetForGIdx, snapLoop]);
 
     // ── Mount: place track immediately ───────────────────────────────────────
@@ -165,9 +160,9 @@ function ClientsExperiences() {
     // ── Pointer handlers ──────────────────────────────────────────────────────
     const onPointerDown = useCallback((e) => {
         cancelAnimationFrame(rafRef.current);
-        snapTargetRef.current  = null;
-        draggingRef.current    = true;
-        dragStartXRef.current  = e.clientX;
+        snapTargetRef.current = null;
+        draggingRef.current = true;
+        dragStartXRef.current = e.clientX;
         dragStartOffRef.current = offsetRef.current;
         setIsDragging(true);
         containerRef.current?.setPointerCapture?.(e.pointerId);
@@ -185,13 +180,13 @@ function ClientsExperiences() {
         draggingRef.current = false;
         setIsDragging(false);
 
-        const delta     = e.clientX - dragStartXRef.current;
-        const { step }  = getStepAndCenter();
+        const delta = e.clientX - dragStartXRef.current;
+        const { step } = getStepAndCenter();
         const threshold = step * 0.22;
 
         let nextG = gIdxRef.current;
-        if      (delta < -threshold) nextG += 1;
-        else if (delta >  threshold) nextG -= 1;
+        if (delta < -threshold) nextG += 1;
+        else if (delta > threshold) nextG -= 1;
 
         nextG = Math.max(0, Math.min(TOTAL - 1, nextG));
 
@@ -202,9 +197,9 @@ function ClientsExperiences() {
 
     // ── Dot navigation ────────────────────────────────────────────────────────
     const goToReal = useCallback((realIdx) => {
-        const cur   = ((gIdxRef.current % COUNT) + COUNT) % COUNT;
-        let delta   = realIdx - cur;
-        if (delta >  COUNT / 2) delta -= COUNT;
+        const cur = ((gIdxRef.current % COUNT) + COUNT) % COUNT;
+        let delta = realIdx - cur;
+        if (delta > COUNT / 2) delta -= COUNT;
         if (delta < -COUNT / 2) delta += COUNT;
         setActiveReal(realIdx);
         snapTo(gIdxRef.current + delta);
@@ -213,7 +208,7 @@ function ClientsExperiences() {
     // ── Card click ────────────────────────────────────────────────────────────
     const onCardClick = useCallback((cardGIdx) => {
         if (draggingRef.current) return;
-        const nextG   = cardGIdx;
+        const nextG = cardGIdx;
         const realIdx = ((nextG % COUNT) + COUNT) % COUNT;
         setActiveReal(realIdx);
         snapTo(nextG);
@@ -263,9 +258,9 @@ function ClientsExperiences() {
                     {extendedList.map((testimonial, idx) => {
                         // ── KEY FIX: drive opacity/scale from React state (activeReal),
                         //    never from a ref — so it always re-renders correctly.
-                        const realDist    = Math.abs(testimonial._real - activeReal);
+                        const realDist = Math.abs(testimonial._real - activeReal);
                         const wrappedDist = Math.min(realDist, COUNT - realDist);
-                        const isActive    = testimonial._real === activeReal;
+                        const isActive = testimonial._real === activeReal;
 
                         return (
                             <div
@@ -313,11 +308,10 @@ function ClientsExperiences() {
                         key={i}
                         onClick={() => goToReal(i)}
                         aria-label={`Go to testimonial ${i + 1}`}
-                        className={`rounded-full transition-all duration-300 ${
-                            i === activeReal
+                        className={`rounded-full transition-all duration-300 ${i === activeReal
                                 ? "w-6 h-2 bg-brand"
                                 : "w-2 h-2 bg-brand/30 hover:bg-brand/60"
-                        }`}
+                            }`}
                     />
                 ))}
             </div>
