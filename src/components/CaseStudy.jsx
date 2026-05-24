@@ -1,56 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-
-const projects = [
-  {
-    title: "Multi-Portal E-Commerce Platform for Certified Natural Gemstones with Investor & CMS Integration",
-    tags: [
-      { label: "E-Commerce", color: "#4C70EC" },
-      { label: "CMS", color: "#FE9E48" },
-      { label: "MERN", color: "#3CC9A7" },
-      { label: "Investor Portal", color: "#A855F7" },
-    ],
-    description:
-      "A full-stack MERN e-commerce platform built across three interconnected portals. The public storefront showcases certified natural gemstones with a trust-focused UI, secure checkout, and full input validation. The investor portal lets approved investors fund specific listings and automatically receive profit-share payouts upon sale. The CMS-powered admin panel gives full control over products, taxonomy, investor approvals, payout requests, testimonials, orders, and bargainer applications — all from a single real-time dashboard.",
-    hours: "120+",
-    pages: "40+",
-    liveUrl: "https://github.com/FaiziCodeSpace/khaki-gemstone.git",
-    image: "/images/Khakigemstone/Image-1.jpg",
-  },
-  {
-    title: "Smart Stamp Generator & AgentHub — Car Dealer Document & Field Agent Platform",
-    tags: [
-      { label: "PDF Generation", color: "#EF4444" },
-      { label: "Urdu OCR", color: "#FE9E48" },
-      { label: "Geolocation", color: "#3CC9A7" },
-      { label: "Multi-Portal", color: "#6366F1" },
-    ],
-    description:
-      "A dual-portal web app built for the car dealership industry. The stamp portal lets users upload a stamp paper, fill a dynamic template, and auto-generate a formatted PDF via jsPDF — with an Urdu OCR API to read and parse Urdu-language stamp documents, eliminating manual PDF editing entirely. The AgentHub portal lets car bargainers register, get admin-approved, then browse a live list of nearby agents. One tap opens WhatsApp with the bargainer's GPS coordinates pre-embedded, so the agent can navigate directly via Google Maps — no back-and-forth needed.",
-    hours: "80+",
-    pages: "20+",
-    liveUrl: "https://github.com/FaiziCodeSpace/khaki-gemstone.git",
-    image: "/images/Agenthub/Image-1.jpg",
-  },
-  {
-    title: "Personal Developer Portfolio — Next.js Web App with Multi-Section UI & Theme System",
-    tags: [
-      { label: "Next.js", color: "#4C70EC" },
-      { label: "Tailwind CSS", color: "#3CC9A7" },
-      { label: "UI/UX", color: "#A855F7" },
-      { label: "Dark Mode", color: "#FE9E48" },
-    ],
-    description:
-      "A fully custom developer portfolio built with Next.js and Tailwind CSS, featuring a component-driven architecture across sections including Hero, Services, Work, Case Studies, Pricing, Testimonials, and Footer. Includes a light/dark theme system with a custom Theme Provider, a skills marquee, dot-pattern backgrounds, and fluid responsive typography using locally hosted Satoshi fonts. Every section is designed from scratch — no UI kits, no templates.",
-    hours: "20+",
-    components: "15+",
-    liveUrl: "https://github.com/FaiziCodeSpace/Portfolio.git",
-    image: "/images/Portfolio/Image-1.jpg",
-  },
-
-];
+import { useContent } from "@/i18n/ContentContext";
 
 function CaseStudy() {
+  const t = useContent("caseStudy");
+  const projects = t.projects;
+
   const [current, setCurrent] = useState(0);
   const [prev, setPrev] = useState(null);
   const [transitioning, setTransitioning] = useState(false);
@@ -82,16 +37,16 @@ function CaseStudy() {
   return (
     <section className="case-study-section">
       <div>
-        
+
         <div className="case-study-header">
-          <h2 className="text-brand font-bold case-study-eyebrow">OUR PROJECTS</h2>
+          <h2 className="text-brand font-bold case-study-eyebrow">{t.eyebrow}</h2>
           <h2 className="text-muted font-bebas font-medium case-study-heading">
-            Case study
+            {t.heading}
           </h2>
         </div>
 
         <div className="case-study-body font-satoshi pr-6 md:pr-0 mt-5 md:mt-0">
-          
+
           <div
             key={animKey}
             className="case-study-left"
@@ -99,7 +54,7 @@ function CaseStudy() {
               animation: `slideInContent 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
             }}
           >
-            
+
             <p className="font-bold case-study-title">{project.title}</p>
 
             <div className="case-study-tags">
@@ -114,34 +69,36 @@ function CaseStudy() {
               ))}
             </div>
 
-            <div className="w-full ">
+            <div className="w-full">
               <p className="case-study-desc">{project.description}</p>
               <div className="case-study-stats">
                 <div>
-                  <p className="stat-label">Total Development Time</p>
-                  <h2 className="stat-value">{project.hours} Hours</h2>
+                  <p className="stat-label">{t.stats.timeLabel}</p>
+                  <h2 className="stat-value">{project.hours} {t.stats.timeUnit}</h2>
                 </div>
                 <div>
-                  <p className="stat-label">{project?.components ? "Components Created" : "Pages Created"}</p>
+                  <p className="stat-label">
+                    {project?.components ? t.stats.componentsLabel : t.stats.pagesLabel}
+                  </p>
                   <h2 className="stat-value">{project?.pages}{project?.components}</h2>
                 </div>
                 <div>
-                  <p className="stat-label">Visit Git Repo</p>
+                  <p className="stat-label">{t.stats.repoLabel}</p>
                   <a
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="stat-value hover:underline cursor-pointer block"
                   >
-                    Visit Now
+                    {t.stats.repoLink}
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="case-study-image-wrap ">
-            
+          <div className="case-study-image-wrap">
+
             {prev !== null && (
               <img
                 key={`img-out-${prev}`}
@@ -153,8 +110,9 @@ function CaseStudy() {
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  animation: `imgSlideOut${direction === "next" ? "Left" : "Right"
-                    } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+                  animation: `imgSlideOut${
+                    direction === "next" ? "Left" : "Right"
+                  } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
                   zIndex: 1,
                 }}
               />
@@ -170,8 +128,9 @@ function CaseStudy() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                animation: `imgSlideIn${direction === "next" ? "Right" : "Left"
-                  } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
+                animation: `imgSlideIn${
+                  direction === "next" ? "Right" : "Left"
+                } 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards`,
                 zIndex: 2,
               }}
             />
@@ -202,7 +161,7 @@ function CaseStudy() {
             >
               {[
                 { label: "Previous", onClick: prevSlide, path: "M10 12L6 8L10 4" },
-                { label: "Next", onClick: next, path: "M6 4L10 8L6 12" },
+                { label: "Next",     onClick: next,      path: "M6 4L10 8L6 12"  },
               ].map((btn) => (
                 <button
                   key={btn.label}
@@ -291,7 +250,6 @@ function CaseStudy() {
                 padding-left: clamp(16px, 4vw, 64px);
               }
 
-              /* Switch to side-by-side above ~768px */
               @media (min-width: 768px) {
                 .case-study-body {
                   flex-direction: row;
@@ -379,8 +337,6 @@ function CaseStudy() {
                 border-radius: clamp(12px, 1.5vw, 22px) 0 0 clamp(12px, 1.5vw, 22px);
                 overflow: hidden;
                 background: #27272A;
-                
-                /* On mobile full-width, no left-only radius */
               }
 
               @media (max-width: 767px) {

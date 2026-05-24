@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useContent } from "@/i18n/ContentContext";
 import { X, Zap, BarChart2, Briefcase, Crown, Check, Mail, User, Phone, Globe, Calendar, Clock, Send, Lock } from "lucide-react";
 
 const plans = [
@@ -78,7 +79,7 @@ const plans = [
   },
 ];
 
-function Modal({ plan, onClose }) {
+function Modal({ plan, onClose, modalT }) {
   const [form, setForm] = useState({ name: "", email: "", phone: "", website: "", message: "", date: "", time: "" });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -90,7 +91,7 @@ function Modal({ plan, onClose }) {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.email.trim()) { setError("Email is required."); return; }
+    if (!form.email.trim()) { setError(modalT.errorRequired); return; }
 
     setLoading(true);
     try {
@@ -103,7 +104,7 @@ function Modal({ plan, onClose }) {
       if (!res.ok) { setError(data.error || "Something went wrong."); return; }
       setSubmitted(true);
     } catch {
-      setError("Network error. Please try again.");
+      setError(modalT.errorNetwork);
     } finally {
       setLoading(false);
     }
@@ -436,6 +437,10 @@ function Modal({ plan, onClose }) {
 }
 
 export default function PricingSection() {
+  const t = useContent("pricing");
+  // Inject lucide icons into plans (icons can't be serialized in content.js)
+  const iconMap = { basic: Zap, standard: BarChart2, corporate: Briefcase, award: Crown };
+  const plans = t.plans.map(p => ({ ...p, icon: iconMap[p.id] }));
   const [selected, setSelected] = useState(null);
 
   return (

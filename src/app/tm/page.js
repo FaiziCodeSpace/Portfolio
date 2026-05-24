@@ -8,7 +8,7 @@ import PricingSection from "@/components/Pricing";
 import ClientsExperiences from "@/components/ClientsExperiences";
 import Footer from "@/components/Footer";
 
-const VARIANT = "individual";
+const VARIANT = "team";
 
 export const metadata = {
   title: content.meta[VARIANT].title,
@@ -16,7 +16,7 @@ export const metadata = {
   icons: { icon: "/Logo/Logo-light.svg" },
 };
 
-export default function Home() {
+export default function TeamPage() {
   return (
     <PortfolioShell variant={VARIANT}>
       <HeroSection />

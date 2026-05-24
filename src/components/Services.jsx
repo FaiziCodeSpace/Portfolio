@@ -1,32 +1,10 @@
 "use client";
 
 import { useState } from "react";
-
-const cards = [
-  {
-    id: "01",
-    topic: "DESIGNING",
-    description:
-      "Crafting clean, responsive interfaces with a focus on user experience — from wireframes and Figma prototypes to polished, pixel-perfect layouts that look great on every device.",
-    image: "/images/Services/designing.jpg",
-  },
-  {
-    id: "02",
-    topic: "DEVELOPMENT",
-    description:
-      "Building fast, scalable web applications using Next.js, React, and modern full-stack tools — including CMS integration, REST APIs, authentication, and custom dashboards.",
-    image: "/images/Services/development.jpg",
-  },
-  {
-    id: "03",
-    topic: "ANIMATIONS & AI",
-    description:
-      "Bringing sites to life with scroll animations, page transitions, and micro-interactions using GSAP and Framer Motion — plus AI integrations and automation for smarter digital experiences.",
-    image: "/images/Services/ai.jpg",
-  },
-];
+import { useContent } from "@/i18n/ContentContext";
 
 function Services() {
+  const t = useContent("services");
   const [active, setActive] = useState(0);
 
   return (
@@ -34,7 +12,7 @@ function Services() {
 
       <div className="flex flex-col md:flex-row pl-6 md:px-0 md:pl-12 lg:pl-20 items-start md:items-center justify-between gap-6 md:gap-8">
         <h1 className="font-bebas tracking-wide text-6xl sm:text-7xl md:text-8xl lg:text-[104px] font-bold leading-none shrink-0">
-          Services
+          {t.heading}
         </h1>
         <div className="w-[60%] h-[50px] sm:h-[70px] md:h-[90px] lg:h-[119px] border-brand border-l-[12px] sm:border-l-[20px] md:border-l-[30px] lg:border-l-[39px] border-t-[12px] sm:border-t-[20px] md:border-t-[30px] lg:border-t-[39px] border-b-[12px] sm:border-b-[20px] md:border-b-[30px] lg:border-b-[39px] rounded-l-full self-end md:self-auto" />
       </div>
@@ -42,7 +20,7 @@ function Services() {
       <div className="flex flex-col lg:flex-row w-full gap-6 lg:gap-10">
 
         <div className="hidden lg:block relative lg:w-[40%] lg:h-[700px] rounded-r-[40px] overflow-hidden flex-shrink-0">
-          {cards.map((card, i) => (
+          {t.cards.map((card, i) => (
             <img
               key={i}
               src={card.image}
@@ -58,7 +36,7 @@ function Services() {
         </div>
 
         <div className="flex flex-col gap-3 lg:gap-4 flex-1 px-4 sm:px-6 lg:pl-0 lg:pr-10">
-          {cards.map((card, i) => (
+          {t.cards.map((card, i) => (
             <div
               key={i}
               onMouseEnter={() => setActive(i)}
@@ -69,7 +47,6 @@ function Services() {
                 opacity: active === i ? 1 : 0.6,
               }}
             >
-              
               <div
                 className="block lg:hidden w-full overflow-hidden"
                 style={{

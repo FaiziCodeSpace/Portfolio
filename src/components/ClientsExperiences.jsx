@@ -1,37 +1,14 @@
 "use client";
 
 import { useRef, useState, useEffect, useCallback } from "react";
+import { useContent } from "@/i18n/ContentContext";
 
 const COPIES = 7;                      
 const MID = Math.floor(COPIES / 2); 
 
 function ClientsExperiences() {
-    const testimonials = [
-        {
-            CompanyName: "KhakiGemstone",
-            review: "Honestly, working with Faizan was a pleasant surprise. The project wrapped up faster than I expected, and the quality didn't take a hit because of it. He kept me in the loop the whole time and always gave me a heads up before anything major happened.",
-            name: "Ayub Khan",
-            position: "CEO of KhakiGemstone",
-        },
-        {
-            CompanyName: "Iqra School System",
-            review: "Faizan got the job done without any fuss. He communicated well, stuck to the timeline, and delivered exactly what we asked for. No surprises, just solid, reliable work.",
-            name: "Qaisar Niaz",
-            position: "Administration of IT",
-        },
-        {
-            CompanyName: "E-Stamp Agenthub",
-            review: "What stood out most was how much care he put into the details. Faizan was easy to reach, dependable, and made the whole development experience feel smooth and straightforward.",
-            name: "Moiz Hassan",
-            position: "Manager",
-        },
-        {
-            CompanyName: "ODA Agency",
-            review: "Faizan took care of everything from planning all the way to deployment. His creativity and professionalism really showed in the final product. It was genuinely a step above what we anticipated.",
-            name: "Meher Ali",
-            position: "CEO",
-        }
-    ];
+    const t = useContent("testimonials");
+    const testimonials = t.items;
 
     const COUNT = testimonials.length;
 
@@ -206,7 +183,7 @@ function ClientsExperiences() {
                     border-b-[clamp(8px,1.8vw,30px)]
                     rounded-r-full self-end md:self-auto" />
                 <p className="font-bebas text-nowrap text-[clamp(28px,7vw,104px)] leading-none px-2 text-center">
-                    CLIENTS EXPERIENCES
+                    {t.heading.toUpperCase()}
                 </p>
                 <div className="w-[20%] h-[clamp(36px,6vw,100px)] border-brand
                     border-l-[clamp(8px,1.8vw,30px)]

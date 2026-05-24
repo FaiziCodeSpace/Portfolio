@@ -4,15 +4,11 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import ThemeToggle from "./UI/ThemeToggle";
 import { ContactModal } from "./Contact";
-
-const navLinks = [
-  { id: "services", label: "Services" },
-  { id: "process", label: "Process" },
-  { id: "pricing", label: "Pricing" },
-  { id: "contact", label: "Contact" },
-];
+import { useContent } from "@/i18n/ContentContext";
 
 function Navbar() {
+  const t = useContent("navbar");
+
   const [active, setActive] = useState("");
   const [contactOpen, setContactOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -35,9 +31,7 @@ function Navbar() {
   useEffect(() => {
     if (!menuOpen) return;
     const handleClick = (e) => {
-      if (drawerRef.current && !drawerRef.current.contains(e.target)) {
-        closeMenu();
-      }
+      if (drawerRef.current && !drawerRef.current.contains(e.target)) closeMenu();
     };
     document.addEventListener("mousedown", handleClick);
     return () => document.removeEventListener("mousedown", handleClick);
@@ -45,7 +39,7 @@ function Navbar() {
 
   useEffect(() => {
     const observers = [];
-    navLinks.forEach(({ id }) => {
+    t.links.forEach(({ id }) => {
       if (id === "contact") return;
       const el = document.getElementById(id);
       if (!el) return;
@@ -57,7 +51,7 @@ function Navbar() {
       observers.push(observer);
     });
     return () => observers.forEach((o) => o.disconnect());
-  }, []);
+  }, [t.links]);
 
   const handleNavClick = (e, id) => {
     e.preventDefault();
@@ -84,15 +78,14 @@ function Navbar() {
 
   return (
     <>
-      
       <nav className="fixed top-0 inset-x-0 z-50 md:mx-8 flex justify-between items-center px-6 md:px-10 py-4 md:py-6 rounded-b-[40px] bg-secondary/80 backdrop-blur-md shadow-lg border border-white/10">
         <Link href="/" onClick={() => menuOpen && closeMenu()}>
-          <img src="/Logo/Logo-dark.svg" alt="Company Logo" className="h-7 md:h-8 w-auto block dark:hidden" />
+          <img src="/Logo/Logo-dark.svg"  alt="Company Logo" className="h-7 md:h-8 w-auto block dark:hidden" />
           <img src="/Logo/Logo-light.svg" alt="Company Logo" className="h-7 md:h-8 w-auto hidden dark:block" />
         </Link>
 
         <ul className="hidden sm:flex gap-8">
-          {navLinks.map(({ id, label }) => (
+          {t.links.map(({ id, label }) => (
             <li key={id}>
               <a
                 href={id === "contact" ? undefined : `#${id}`}
@@ -108,13 +101,9 @@ function Navbar() {
         </ul>
 
         <div className="flex items-center gap-3">
-          
-          <div
-            className="hidden sm:block"
-          >
+          <div className="hidden sm:block">
             <ThemeToggle />
           </div>
-
           <button
             onClick={() => (menuOpen ? closeMenu() : setMenuOpen(true))}
             aria-label="Toggle menu"
@@ -127,6 +116,7 @@ function Navbar() {
         </div>
       </nav>
 
+      {/* Mobile backdrop */}
       <div
         onClick={() => menuOpen && closeMenu()}
         className="fixed inset-0 z-40 sm:hidden"
@@ -141,6 +131,7 @@ function Navbar() {
         }}
       />
 
+      {/* Mobile drawer */}
       <div
         ref={drawerRef}
         className="fixed top-0 right-0 z-50 h-full w-[75vw] max-w-xs flex flex-col sm:hidden"
@@ -148,7 +139,6 @@ function Navbar() {
           transform: drawerSlideIn ? "translateX(0)" : "translateX(100%)",
           transition: "transform 320ms cubic-bezier(0.32, 0, 0.15, 1)",
           visibility: menuOpen ? "visible" : "hidden",
-          
           background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%)",
           backgroundColor: "rgba(15, 15, 20, 0.6)",
           backdropFilter: "blur(40px) saturate(200%) brightness(110%)",
@@ -157,20 +147,14 @@ function Navbar() {
           boxShadow: "-8px 0 32px rgba(0,0,0,0.4), inset 1px 0 0 rgba(255,255,255,0.08)",
         }}
       >
-        
         <div style={{
-          position: "absolute",
-          top: 0, left: 0, right: 0,
-          height: "1px",
+          position: "absolute", top: 0, left: 0, right: 0, height: "1px",
           background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%)",
         }} />
 
-        <div
-          className="flex items-center justify-between px-6 py-5"
-          style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
-        >
+        <div className="flex items-center justify-between px-6 py-5" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           <Link href="/" onClick={() => menuOpen && closeMenu()}>
-            <img src="/Logo/Logo-dark.svg" alt="Logo" className="h-6 w-auto block dark:hidden" />
+            <img src="/Logo/Logo-dark.svg"  alt="Logo" className="h-6 w-auto block dark:hidden" />
             <img src="/Logo/Logo-light.svg" alt="Logo" className="h-6 w-auto hidden dark:block" />
           </Link>
           <button
@@ -188,7 +172,7 @@ function Navbar() {
         </div>
 
         <nav className="flex flex-col gap-1 px-4 py-6 flex-1">
-          {navLinks.map(({ id, label }, i) => (
+          {t.links.map(({ id, label }, i) => (
             <a
               key={id}
               href={id === "contact" ? undefined : `#${id}`}
@@ -211,10 +195,7 @@ function Navbar() {
           ))}
         </nav>
 
-        <div
-          className="px-6 py-5 flex items-center justify-between"
-          style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-        >
+        <div className="px-6 py-5 flex items-center justify-between" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
           <span className="text-xs text-muted font-medium tracking-wide uppercase">Theme</span>
           <ThemeToggle />
         </div>

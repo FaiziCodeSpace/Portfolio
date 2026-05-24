@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 import DotBg from './UI/Dot-bg'
 import SkillsMarquee from './UI/Skillsmarquee'
 import { ContactModal } from './Contact'
+import { useContent } from "@/i18n/ContentContext"
 
 function HeroSection({ hidden = false }) {
+  const t = useContent("hero")
   const [contactOpen, setContactOpen] = useState(false)
 
   return (
@@ -14,7 +16,7 @@ function HeroSection({ hidden = false }) {
 
         <div className="relative flex flex-col top-30 sm:top-20 md:top-10 items-center leading-none w-full">
           <h1
-            className="flex font-bebas leading-none text-text-primary" 
+            className="flex font-bebas leading-none text-text-primary"
             style={{ fontSize: 'clamp(70px, 14vw, 180px)' }}
           >
             <span className="flex flex-col text-right leading-[0.82]">
@@ -46,11 +48,11 @@ function HeroSection({ hidden = false }) {
             className="text-text-primary tracking-wide leading-none font-medium font-satoshi mt-2"
             style={{ fontSize: 'clamp(10px, 1.5vw, 30.69px)' }}
           >
-            Your development partner.
+            {t.tagline}
           </p>
 
           <p className="font-satoshi text-[12px] sm:text-sm lg:text-base font-normal leading-6 max-w-[220px] sm:max-w-[260px] mt-10 text-left self-start ml-4 sm:ml-8 md:self-auto md:ml-[60%]">
-            Hire me for short-term, recurring, or full-time projects — delivering precise and results that exceed expectations.
+            {t.description}
           </p>
         </div>
 
@@ -69,7 +71,7 @@ function HeroSection({ hidden = false }) {
             className="relative z-10 px-4 h-12 md:h-16 cursor-pointer flex justify-center gap-2 md:gap-3 items-center rounded-full bg-foreground text-[11px] md:text-sm text-white dark:text-black font-satoshi font-bold shadow-xl active:scale-95 transition-transform"
           >
             <div className="w-7 h-7 md:w-10 md:h-10 bg-[#FF0000] rounded-full shrink-0" />
-            <p className="whitespace-nowrap">CHAT WITH FAIZAN</p>
+            <p className="whitespace-nowrap">{t.cta}</p>
 
             <div
               className={`${hidden ? 'hidden' : 'block'} absolute w-3 h-3 sm:w-4 sm:h-4 bg-[#FE6E6E] border-[2px] sm:border-[3px] border-foreground rounded-full -right-0 -top-0`}

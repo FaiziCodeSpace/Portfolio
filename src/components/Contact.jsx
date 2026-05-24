@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { X, Mail, User, Phone, Send, Lock, MessageSquare, AlignLeft } from "lucide-react";
 import { useFormSubmit } from "@/lib/hooks/Useformsubmit";
+import { useContent } from "@/i18n/ContentContext";
 
 export function ContactModal({ onClose }) {
+  const t = useContent("contact");
   const [form,   setForm]   = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState({});
 
@@ -19,8 +21,8 @@ export function ContactModal({ onClose }) {
     e.preventDefault();
 
     const errs = {};
-    if (!form.email.trim())   errs.email   = "Email is required.";
-    if (!form.message.trim()) errs.message = "Message is required.";
+    if (!form.email.trim())   errs.email   = t.errorRequired(t.emailLabel);
+    if (!form.message.trim()) errs.message = t.errorRequired(t.messageLabel);
     if (Object.keys(errs).length) { setErrors(errs); return; }
 
     await submit(form);
@@ -97,10 +99,10 @@ export function ContactModal({ onClose }) {
             </button>
             <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(9,9,11,0.1)", borderRadius: "999px", padding: "4px 12px", marginBottom: "1.25rem", animation: "float-badge 3s ease-in-out infinite" }}>
               <MessageSquare size={12} color="#09090b" />
-              <span style={{ fontSize: "11px", fontWeight: 700, color: "#09090b", letterSpacing: ".06em", textTransform: "uppercase" }}>Get in touch</span>
+              <span style={{ fontSize: "11px", fontWeight: 700, color: "#09090b", letterSpacing: ".06em", textTransform: "uppercase" }}>{t.badge}</span>
             </div>
-            <h2 style={{ fontSize: "28px", fontWeight: 800, color: "#09090b", margin: "0 0 8px", lineHeight: 1.15 }}>Let's talk</h2>
-            <p style={{ fontSize: "13px", color: "rgba(9,9,11,0.65)", margin: "0 0 2rem", lineHeight: 1.6 }}>Have a question or idea? Drop us a message and we'll get back to you promptly.</p>
+            <h2 style={{ fontSize: "28px", fontWeight: 800, color: "#09090b", margin: "0 0 8px", lineHeight: 1.15 }}>{t.heading}</h2>
+            <p style={{ fontSize: "13px", color: "rgba(9,9,11,0.65)", margin: "0 0 2rem", lineHeight: 1.6 }}>{t.subheading}</p>
             {[
               { icon: <Mail size={15} color="#09090b" />, label: "Email", value: "faizanwebdev1@gmail.com" },
               { icon: <Phone size={15} color="#09090b" />, label: "Phone", value: "+92 315 070-6255" },
@@ -124,7 +126,7 @@ export function ContactModal({ onClose }) {
                 <Send size={22} color="#09090b" strokeWidth={2.5} />
               </div>
               <div>
-                <h3 style={{ fontSize: "22px", fontWeight: 800, color: "var(--color-text-primary)", margin: "0 0 8px" }}>Message sent!</h3>
+                <h3 style={{ fontSize: "22px", fontWeight: 800, color: "var(--color-text-primary)", margin: "0 0 8px" }}>{t.successTitle}</h3>
                 <p style={{ fontSize: "14px", color: "var(--color-muted)", margin: 0 }}>We'll get back to you within 24 hours.</p>
               </div>
               <button onClick={onClose} style={{ padding: "11px 32px", borderRadius: "10px", border: "none", backgroundColor: "var(--color-brand)", color: "#09090b", fontWeight: 700, fontSize: "14px", cursor: "pointer", marginTop: "8px" }}>Done</button>
@@ -133,8 +135,8 @@ export function ContactModal({ onClose }) {
             <form onSubmit={handleSubmit} style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "1.1rem", boxSizing: "border-box" }}>
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
                 <div>
-                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--color-text-primary)", margin: "0 0 4px" }}>Send a message</h3>
-                  <p style={{ fontSize: "13px", color: "var(--color-muted)", margin: 0 }}>We'll get back to you within 24 hours.</p>
+                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--color-text-primary)", margin: "0 0 4px" }}>{t.submitLabel}</h3>
+                  <p style={{ fontSize: "13px", color: "var(--color-muted)", margin: 0 }}>{t.successMsg}</p>
                 </div>
                 <button type="button" onClick={onClose} className="contact-close-mobile" style={{ width: "30px", height: "30px", flexShrink: 0, borderRadius: "8px", border: "1px solid var(--color-border)", background: "var(--color-secondary)", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "var(--color-muted)" }}>
                   <X size={14} />
@@ -143,23 +145,23 @@ export function ContactModal({ onClose }) {
 
               <div className="contact-grid-2">
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                  {lbl("Name")}
+                  {lbl(t.nameLabel)}
                   {inputWrap(<User size={15} />, <input type="text" name="name" value={form.name} onChange={handle} placeholder="John Doe" style={inputBase} />)}
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                  {lbl("Email", true)}
+                  {lbl(t.emailLabel, true)}
                   {inputWrap(<Mail size={15} />, <input type="email" name="email" value={form.email} onChange={handle} placeholder="you@company.com" style={inputBase} />)}
                   {errors.email && <span style={{ fontSize: "12px", color: "var(--color-brand)", fontWeight: 500 }}>{errors.email}</span>}
                 </div>
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                {lbl("Subject")}
+                {lbl(t.subjectLabel)}
                 {inputWrap(<AlignLeft size={15} />, <input type="text" name="subject" value={form.subject} onChange={handle} placeholder="What's this about?" style={inputBase} />)}
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                {lbl("Message", true)}
+                {lbl(t.messageLabel, true)}
                 <div style={{ border: "1px solid var(--color-border)", borderRadius: "10px", padding: "10px 12px", backgroundColor: "var(--color-secondary)" }}>
                   <textarea name="message" value={form.message} onChange={handle} rows={4} placeholder="Tell us what's on your mind…" style={{ border: "none", background: "transparent", outline: "none", fontSize: "14px", color: "var(--color-text-primary)", width: "100%", resize: "none", lineHeight: "1.6", minHeight: "90px" }} />
                 </div>
@@ -187,7 +189,7 @@ export function ContactModal({ onClose }) {
                 }}
               >
                 <Send size={15} />
-                {loading ? "Sending…" : "Send message"}
+                {loading ? "Sending…" : t.submitLabel}
               </button>
 
               <p style={{ textAlign: "center", fontSize: "12px", color: "var(--color-muted)", margin: 0 }}>
