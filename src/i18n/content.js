@@ -401,13 +401,13 @@ const work = {
     header: "Wie wir arbeiten",
     phases: [
       {
-        image: "/images/Strategy/Strategy-Thumbnail.jpg",
+        image: "/images/Strategy/de/Strategy-Thumbnail.jpg",
         name: "Strategie",
         link: "www.khakigemstone.com",
         tag: "Phase 01",
         images: [
           {
-            src: "/images/Strategy/Strategy-1.jpg",
+            src: "/images/Strategy/de/Strategy-1.jpg",
             title: "Discovery Call",
             description:
               "Jedes Projekt beginnt mit einem persönlichen Gespräch. Wir setzen uns mit Ihnen zusammen, um Ihre Ziele, Ihre Nutzer und den Wettbewerb zu verstehen — keine Vorlagen, keine Annahmen, nur gezielte Fragen und echtes Zuhören.",
@@ -415,7 +415,7 @@ const work = {
               "Wir definieren Erfolgskennzahlen, Projektgrenzen und Nicht-Verhandelbarkeiten, bevor auch nur ein Pixel gesetzt wird.",
           },
           {
-            src: "/images/Strategy/Strategy-2.jpg",
+            src: "/images/Strategy/de/Strategy-2.jpg",
             title: "Recherche & Analyse",
             description:
               "Sobald wir Ihre Welt verstehen, gehen wir in die Tiefe. Wettbewerbsanalysen, User-Persona-Mapping, Marktpositionierung — alles zusammengefasst in einem gemeinsamen Strategie-Board.",
@@ -423,7 +423,7 @@ const work = {
               "Ergebnis: ein gemeinsames Research-Board mit klaren Erkenntnissen, Personas und Potenzialen.",
           },
           {
-            src: "/images/Strategy/Strategy-3.jpg",
+            src: "/images/Strategy/de/Strategy-3.jpg",
             title: "Roadmap & Freigabe",
             description:
               "Strategie ohne Plan ist nur Theorie. Wir übersetzen alle Erkenntnisse in eine konkrete Projekt-Roadmap — mit Phasen, Zeitplänen und Meilensteinen — und gehen diese gemeinsam mit Ihnen durch.",
@@ -458,7 +458,7 @@ const work = {
             detail: "Ergebnis: eine vollständige Figma-Datei mit allen Screens, Komponenten und Design-Tokens.",
           },
           {
-            src: "/images/Designing/Designing-3.jpg",
+            src: "/images/Designing/de/Designing-3.jpg",
             title: "Prototyp & Übergabe",
             description:
               "Interaktive Prototypen lassen Sie das Produkt fühlen, bevor es gebaut ist. Wir gehen jeden Flow durch, nehmen Ihr Feedback auf und übergeben eine entwicklungsfertige Figma-Datei.",
@@ -478,7 +478,7 @@ const work = {
         tag: "Phase 03",
         images: [
           {
-            src: "/images/Developer/Developer-1.jpg",
+            src: "/images/Developer/de/Developer-1.jpg",
             title: "Architektur & Setup",
             description:
               "Wir wählen den richtigen Tech-Stack für Ihre Anforderungen — Next.js, Tailwind, Headless CMS oder No-Code. CI/CD-Pipelines und Code-Standards werden von Beginn an eingerichtet.",
@@ -486,14 +486,14 @@ const work = {
               "Jedes Projekt folgt einer strukturierten Repository-Struktur, einem Code-Review-Prozess und einer Deployment-Pipeline.",
           },
           {
-            src: "/images/Developer/Developer-2.jpg",
+            src: "/images/Developer/de/Developer-2.jpg",
             title: "Entwicklung & Review",
             description:
               "Komponenten werden isoliert entwickelt, getestet und zu vollständigen Seiten zusammengesetzt. Sie haben während des gesamten Prozesses Zugriff auf eine Staging-Umgebung und können jederzeit Feedback geben.",
             detail: "Wöchentliche Check-ins halten Sie auf dem Laufenden, ohne uns zu bremsen.",
           },
           {
-            src: "/images/Developer/Developer-3.jpg",
+            src: "/images/Developer/de/Developer-3.jpg",
             title: "Launch & Übergabe",
             description:
               "Wenn alles getestet und freigegeben ist, deployen wir in die Produktion. Sie erhalten eine vollständige Übergabe, dokumentierten Quellcode, CMS-Schulung und ein Zeitfenster für sofortige Korrekturen nach dem Launch.",
