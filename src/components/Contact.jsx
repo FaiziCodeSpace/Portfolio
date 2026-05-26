@@ -19,12 +19,10 @@ export function ContactModal({ onClose }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const errs = {};
     if (!form.email.trim())   errs.email   = t.errorRequired(t.emailLabel);
     if (!form.message.trim()) errs.message = t.errorRequired(t.messageLabel);
     if (Object.keys(errs).length) { setErrors(errs); return; }
-
     await submit(form);
   };
 
@@ -70,17 +68,20 @@ export function ContactModal({ onClose }) {
         .contact-close-mobile { display: flex; }
         .contact-close-desktop { display: none; }
         .contact-grid-2 { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .contact-info-mobile { display: flex; }
         @media (min-width: 768px) {
           .contact-modal-left { display: flex; width: 280px; flex-shrink: 0; background-color: var(--color-brand); padding: 2.5rem 2rem; flex-direction: column; justify-content: space-between; position: relative; overflow: hidden; }
           .contact-close-mobile { display: none; }
           .contact-close-desktop { display: flex; }
           .contact-grid-2 { grid-template-columns: 1fr 1fr; }
+          .contact-info-mobile { display: none; }
         }
         .shimmer-btn::after { content: ''; position: absolute; top: 0; left: 0; width: 40%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent); animation: shimmer 2.4s ease-in-out infinite; }
       `}</style>
 
       <div className="contact-modal-wrap">
 
+        {/* ── Left panel (desktop only) ── */}
         <div className="contact-modal-left">
           {[
             { anim: "orbit1 7s linear infinite", size: 7, color: "rgba(9,9,11,0.25)" },
@@ -104,8 +105,8 @@ export function ContactModal({ onClose }) {
             <h2 style={{ fontSize: "28px", fontWeight: 800, color: "#09090b", margin: "0 0 8px", lineHeight: 1.15 }}>{t.heading}</h2>
             <p style={{ fontSize: "13px", color: "rgba(9,9,11,0.65)", margin: "0 0 2rem", lineHeight: 1.6 }}>{t.subheading}</p>
             {[
-              { icon: <Mail size={15} color="#09090b" />, label: "Email", value: "faizanwebdev1@gmail.com" },
-              { icon: <Phone size={15} color="#09090b" />, label: "Phone", value: "+92 315 070-6255" },
+              { icon: <Mail size={15} color="#09090b" />, label: "Email", value: t.contactEmail },
+              { icon: <Phone size={15} color="#09090b" />, label: "Phone", value: t.contactPhone },
             ].map(({ icon, label, value }) => (
               <div key={label} style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "14px" }}>
                 <div style={{ width: "32px", height: "32px", borderRadius: "8px", background: "rgba(9,9,11,0.1)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{icon}</div>
@@ -119,6 +120,7 @@ export function ContactModal({ onClose }) {
           <p style={{ fontSize: "12px", color: "rgba(9,9,11,0.4)", margin: 0, marginTop: "2rem", position: "relative", zIndex: 1 }}>We read every message personally.</p>
         </div>
 
+        {/* ── Right panel ── */}
         <div className="contact-modal-right">
           {success ? (
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", padding: "3rem 2.5rem", textAlign: "center", gap: "1.25rem" }}>
@@ -127,12 +129,14 @@ export function ContactModal({ onClose }) {
               </div>
               <div>
                 <h3 style={{ fontSize: "22px", fontWeight: 800, color: "var(--color-text-primary)", margin: "0 0 8px" }}>{t.successTitle}</h3>
-                <p style={{ fontSize: "14px", color: "var(--color-muted)", margin: 0 }}>We'll get back to you within 24 hours.</p>
+                <p style={{ fontSize: "14px", color: "var(--color-muted)", margin: 0 }}>{t.successMsg}</p>
               </div>
               <button onClick={onClose} style={{ padding: "11px 32px", borderRadius: "10px", border: "none", backgroundColor: "var(--color-brand)", color: "#09090b", fontWeight: 700, fontSize: "14px", cursor: "pointer", marginTop: "8px" }}>Done</button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: "1.1rem", boxSizing: "border-box" }}>
+
+              {/* Header row */}
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
                 <div>
                   <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--color-text-primary)", margin: "0 0 4px" }}>{t.submitLabel}</h3>
@@ -143,6 +147,27 @@ export function ContactModal({ onClose }) {
                 </button>
               </div>
 
+              {/* Mobile-only contact info pills */}
+              <div className="contact-info-mobile" style={{ gap: "8px" }}>
+                {[
+                  { icon: <Mail size={13} color="var(--color-brand)" />, value: t.contactEmail },
+                  { icon: <Phone size={13} color="var(--color-brand)" />, value: t.contactPhone },
+                ].map(({ icon, value }) => (
+                  <div key={value} style={{
+                    display: "flex", alignItems: "center", gap: "6px",
+                    background: "var(--color-secondary)", border: "1px solid var(--color-border)",
+                    borderRadius: "8px", padding: "6px 10px", flex: 1, minWidth: 0,
+                  }}>
+                    <span style={{ flexShrink: 0 }}>{icon}</span>
+                    <span style={{
+                      fontSize: "11px", fontWeight: 500, color: "var(--color-muted)",
+                      overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap",
+                    }}>{value}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Name + Email */}
               <div className="contact-grid-2">
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                   {lbl(t.nameLabel)}
@@ -155,11 +180,13 @@ export function ContactModal({ onClose }) {
                 </div>
               </div>
 
+              {/* Subject */}
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                 {lbl(t.subjectLabel)}
                 {inputWrap(<AlignLeft size={15} />, <input type="text" name="subject" value={form.subject} onChange={handle} placeholder="What's this about?" style={inputBase} />)}
               </div>
 
+              {/* Message */}
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                 {lbl(t.messageLabel, true)}
                 <div style={{ border: "1px solid var(--color-border)", borderRadius: "10px", padding: "10px 12px", backgroundColor: "var(--color-secondary)" }}>
@@ -168,12 +195,14 @@ export function ContactModal({ onClose }) {
                 {errors.message && <span style={{ fontSize: "12px", color: "var(--color-brand)", fontWeight: 500 }}>{errors.message}</span>}
               </div>
 
+              {/* Submit error */}
               {submitError && (
                 <div style={{ padding: "10px 14px", borderRadius: "8px", backgroundColor: "rgba(239,68,68,0.1)", border: "1px solid rgba(239,68,68,0.25)" }}>
                   <p style={{ margin: 0, fontSize: "13px", color: "#f87171" }}>{submitError}</p>
                 </div>
               )}
 
+              {/* Submit button */}
               <button
                 type="submit"
                 disabled={loading}

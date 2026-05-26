@@ -83,16 +83,27 @@ function CaseStudy() {
                   <h2 className="stat-value">{project?.pages}{project?.components}</h2>
                 </div>
                 <div>
-                  <p className="stat-label">{t.stats.repoLabel}</p>
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="stat-value hover:underline cursor-pointer block"
-                  >
-                    {t.stats.repoLink}
-                  </a>
-                </div>
+  <p className="stat-label">{t.stats.visitLive}</p>
+  <a
+    href={project.liveUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="stat-value hover:underline cursor-pointer block"
+  >
+    Live Preview
+  </a>
+</div>
+<div>
+  <p className="stat-label">{t.stats.repoLabel}</p>
+  
+  <a  href={project.repoUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="stat-value hover:underline cursor-pointer block"
+  >
+    {t.stats.repoLink}
+  </a>
+</div>
               </div>
             </div>
           </div>

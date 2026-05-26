@@ -2,7 +2,7 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react'
 import { useContent } from "@/i18n/ContentContext"
 
-function Modal({ card, index, totalCards, onClose }) {
+function Modal({ card, index, totalCards, onClose, onPrev, onNext }) {
   const [activeImg, setActiveImg] = useState(0)
   const [closing, setClosing] = useState(false)
   const [contentKey, setContentKey] = useState(0)
@@ -414,36 +414,47 @@ function Modal({ card, index, totalCards, onClose }) {
               padding: isMd ? '16px 28px' : '14px 20px',
               borderTop: '1px solid rgba(255,255,255,0.06)', flexShrink: 0,
             }}>
-              <a href={`https://${card.link}`} target='_blank' rel='noreferrer'
-                style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 5,
-                  fontSize: 12, fontWeight: 500, color: 'rgba(255,255,255,0.35)',
-                  textDecoration: 'none', transition: 'color 0.2s',
-                }}
-                onMouseEnter={e => e.currentTarget.style.color = 'rgba(255,255,255,0.85)'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}
-              >
-                <svg width='11' height='11' viewBox='0 0 24 24' fill='none'
-                  stroke='currentColor' strokeWidth='2.2' strokeLinecap='round' strokeLinejoin='round'>
-                  <path d='M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3' />
-                </svg>
-                {card.link}
-              </a>
-              <a href={`https://${card.link}`} target='_blank' rel='noreferrer'
-                className='m-cta'
+              <button
+                onClick={onPrev}
+                disabled={index === 0}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '10px 20px', borderRadius: 9999,
-                  background: 'var(--color-brand)', color: '#000',
-                  fontSize: 13, fontWeight: 700, letterSpacing: '0.03em',
-                  textDecoration: 'none', flexShrink: 0,
+                  background: index === 0 ? 'rgba(255,255,255,0.07)' : 'rgba(255,255,255,0.1)',
+                  border: '1.5px solid rgba(255,255,255,0.12)',
+                  color: index === 0 ? 'rgba(255,255,255,0.25)' : 'rgba(255,255,255,0.75)',
+                  fontSize: 13, fontWeight: 600, cursor: index === 0 ? 'default' : 'pointer',
+                  transition: 'all 0.2s',
                 }}>
-                Start With Us
+                <svg width='13' height='13' viewBox='0 0 24 24' fill='none'
+                  stroke='currentColor' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round'>
+                  <path d='M19 12H5M12 19l-7-7 7-7' />
+                </svg>
+                Prev
+              </button>
+
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'rgba(255,255,255,0.3)' }}>
+                {index + 1} / {totalCards}
+              </span>
+
+              <button
+                onClick={onNext}
+                disabled={index === totalCards - 1}
+                style={{
+                  display: 'inline-flex', alignItems: 'center', gap: 8,
+                  padding: '10px 20px', borderRadius: 9999,
+                  background: index === totalCards - 1 ? 'rgba(255,255,255,0.07)' : 'var(--color-brand)',
+                  border: '1.5px solid transparent',
+                  color: index === totalCards - 1 ? 'rgba(255,255,255,0.25)' : '#000',
+                  fontSize: 13, fontWeight: 700, cursor: index === totalCards - 1 ? 'default' : 'pointer',
+                  transition: 'all 0.2s',
+                }}>
+                Next
                 <svg width='13' height='13' viewBox='0 0 24 24' fill='none'
                   stroke='currentColor' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round'>
                   <path d='M5 12h14M12 5l7 7-7 7' />
                 </svg>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -672,6 +683,8 @@ function Work() {
           index={openCard.index}
           totalCards={workCard.length}
           onClose={() => setOpenCard(null)}
+          onPrev={() => setOpenCard(prev => ({ card: workCard[prev.index - 1], index: prev.index - 1 }))}
+          onNext={() => setOpenCard(prev => ({ card: workCard[prev.index + 1], index: prev.index + 1 }))}
         />
       )}
     </>
