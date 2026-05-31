@@ -13,11 +13,11 @@ export default function Footer() {
 
     return (
         <footer className="w-full bg-secondary border-t border-border flex flex-col mt-[clamp(80px,12vw,350px)]">
-            
+
             <div className="w-full h-1.5 bg-brand" />
 
             <div className="w-full px-8 sm:px-16 lg:px-32 py-14 flex flex-col gap-16 lg:gap-24">
-                
+
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8">
                     <h2 className="text-brand font-bebas font-medium leading-none text-5xl sm:text-6xl lg:text-7xl max-w-xl">
                         {t.cta}
@@ -34,7 +34,7 @@ export default function Footer() {
                             href="hero"
                             onClick={(e) => handleScroll(e, 'hero')}
                         >
-                            <img src="/Logo/Logo-dark.svg"  alt="Company Logo" className="h-7 md:h-8 w-auto block dark:hidden" />
+                            <img src="/Logo/Logo-dark.svg" alt="Company Logo" className="h-7 md:h-8 w-auto block dark:hidden" />
                             <img src="/Logo/Logo-light.svg" alt="Company Logo" className="h-7 md:h-8 w-auto hidden dark:block" />
                             <p>Good Developer</p>
                         </Link>
@@ -45,7 +45,8 @@ export default function Footer() {
                             <span className="text-muted text-xs uppercase tracking-widest mb-1">
                                 {t.profileLabel}
                             </span>
-                            <a href="#" className="hover:text-brand transition-colors duration-200">
+                            
+                            <a href="#about" onClick={(e) => handleScroll(e, "about")} className="hover:text-brand transition-colors duration-200">
                                 {t.aboutLabel}
                             </a>
                         </div>
