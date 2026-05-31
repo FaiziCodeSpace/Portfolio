@@ -5,6 +5,7 @@ import PageLoader from "@/components/UI/PageLoader";
 import { Bebas_Neue } from "next/font/google";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/UI/SmoothScroll";
+import CustomCursor from "@/components/UI/cursor";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -14,11 +15,11 @@ const bebasNeue = Bebas_Neue({
 
 const satoshi = localFont({
   src: [
-    { path: "../../public/fonts/Satoshi-Light.otf",   weight: "300", style: "light"   },
+    { path: "../../public/fonts/Satoshi-Light.otf", weight: "300", style: "light" },
     { path: "../../public/fonts/Satoshi-Regular.otf", weight: "400", style: "regular" },
-    { path: "../../public/fonts/Satoshi-Medium.otf",  weight: "500", style: "medium"  },
-    { path: "../../public/fonts/Satoshi-Bold.otf",    weight: "700", style: "bold"    },
-    { path: "../../public/fonts/Satoshi-Black.otf",   weight: "900", style: "black"   },
+    { path: "../../public/fonts/Satoshi-Medium.otf", weight: "500", style: "medium" },
+    { path: "../../public/fonts/Satoshi-Bold.otf", weight: "700", style: "bold" },
+    { path: "../../public/fonts/Satoshi-Black.otf", weight: "900", style: "black" },
   ],
   variable: "--font-satoshi-next",
   display: "swap",
@@ -34,11 +35,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-/**
- * Root layout — font variables + theme shell only.
- * Navbar is rendered per-route inside PortfolioShell
- * so each variant can inject the right content.
- */
 export default function RootLayout({ children }) {
   return (
     <html
@@ -55,6 +51,7 @@ export default function RootLayout({ children }) {
         >
           <PageLoader />
           <SmoothScroll>
+            <CustomCursor />
             {children}
           </SmoothScroll>
         </ThemeProvider>

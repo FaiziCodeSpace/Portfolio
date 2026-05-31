@@ -1181,7 +1181,7 @@ const footer = {
     description:
       "Wir sind offen für kurzfristige, wiederkehrende und langfristige Zusammenarbeit — mit Fokus auf hochwertige Ergebnisse, Zuverlässigkeit, Liebe zum Detail und klare Kommunikation.",
     profileLabel: "Agentur",
-    aboutLabel: "Über uns",
+    aboutLabel: "Impressum",
     navLabel: "Navigation",
     links: [
       { label: "Start", id: "hero" },
@@ -1193,5 +1193,71 @@ const footer = {
   },
 };
 
-// ─── Public API ────────────────────────────────────────────────────────────
-export const content = { meta, navbar, hero, services, work, caseStudy, pricing, testimonials, contact, footer };
+// ─── About ─────────────────────────────────────────────────────────────────
+const about = {
+  individual: {
+    heading: "About",
+    subheading: "Building things that",
+    subheadingAccent: "actually work.",
+    description:
+      "I'm Faizan — a full-stack developer focused on Next.js, React, and modern web applications. I care about clean code, attention to detail, and delivering work that holds up under real conditions. Whether it's a landing page or a multi-portal platform, I approach every project with the same level of rigour.",
+    quote:
+      "Building something new is always fun",
+    quoteCite: "— Faizan",
+    image: "https://res.cloudinary.com/dboeic8re/image/upload/v1780050622/avatar_rxtm4y.png",
+    imageAlt: "Faizan — Full-stack developer",
+    badge: "Available for projects",
+    badgeSub: "Next.js · React · Full-stack",
+    stats: [
+      { value: "120", label: "Hours on largest build" },
+      { value: "3",   label: "Years experience"       },
+      { value: "10",  label: "Projects delivered"     },
+    ],
+    cta: "Chat with Faizan",
+  },
+
+  team: {
+    heading: "About",
+    subheading: "A small team that",
+    subheadingAccent: "ships real products.",
+    description:
+      "We're a focused development team specialising in Next.js, React, and full-stack web applications. We work closely with each client from discovery through deployment — no handoffs to juniors, no disappearing after launch. Just consistent, high-quality work delivered on time.",
+    quote:
+      "The best products aren't built by the biggest teams — they're built by the most deliberate ones.",
+    quoteCite: "— Good Developer Agency",
+    image: "https://res.cloudinary.com/dboeic8re/image/upload/v1780050622/avatar_rxtm4y.png",
+    imageAlt: "Good Developer — Agency team",
+    badge: "Taking on new clients",
+    badgeSub: "Design · Dev · Strategy",
+    stats: [
+      { value: "3",  label: "Core team members" },
+      { value: "3",  label: "Years shipping"    },
+      { value: "10", label: "Projects live"     },
+    ],
+    cta: "Work with us",
+  },
+
+  de: {
+    heading: "Über uns",
+    subheading: "Entwickelt in Deutschland,",
+    subheadingAccent: "gedacht für den Markt.",
+    description:
+      "Wir sind eine Full-Stack-Agentur mit Fokus auf Next.js, React und moderne Webanwendungen für deutsche Unternehmen. Jedes Projekt wird von Beginn an persönlich begleitet — von der Strategie bis zum Launch. Präzision, Zuverlässigkeit und klare Kommunikation stehen für uns an erster Stelle.",
+    quote:
+      "Qualität bedeutet nicht Perfektion — es bedeutet, konsequent das Richtige zu tun.",
+    quoteCite: "— Good Developer Agentur",
+    image: "https://res.cloudinary.com/dboeic8re/image/upload/f_auto,q_auto/Headshot_qgquwp",
+    imageAlt: "Good Developer — Agentur",
+    badge: "Projekte verfügbar",
+    badgeSub: "Design · Entwicklung · KI",
+    stats: [
+      { value: "120", label: "Stunden größtes Projekt" },
+      { value: "3",   label: "Jahre Erfahrung"         },
+      { value: "10",  label: "Projekte umgesetzt"      },
+    ],
+    cta: "Jetzt anfragen",
+  },
+};
+
+// update the export at the bottom:
+export const content = { meta, navbar, hero, services, work, caseStudy, pricing, testimonials, contact, footer, about };

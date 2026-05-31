@@ -7,6 +7,7 @@ import Work from "@/components/Work";
 import PricingSection from "@/components/Pricing";
 import ClientsExperiences from "@/components/ClientsExperiences";
 import Footer from "@/components/Footer";
+import About from "@/components/About";
 
 const VARIANT = "individual";
 
@@ -23,7 +24,8 @@ export default function Home() {
       <Services />
       <CaseStudy />
       <Work />
-      <PricingSection />
+      <About/>
+      {VARIANT !== "individual" && <PricingSection content={content.pricing[VARIANT]} />}
       <ClientsExperiences />
       <Footer />
     </PortfolioShell>

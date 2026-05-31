@@ -7,6 +7,7 @@ import Work from "@/components/Work";
 import PricingSection from "@/components/Pricing";
 import ClientsExperiences from "@/components/ClientsExperiences";
 import Footer from "@/components/Footer";
+import About from "@/components/About";
 
 const VARIANT = "team";
 
@@ -23,6 +24,7 @@ export default function TeamPage() {
       <Services />
       <CaseStudy />
       <Work />
+      <About />
       <PricingSection />
       <ClientsExperiences />
       <Footer />
