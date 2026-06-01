@@ -30,63 +30,80 @@ function useCounter(target, active, duration = 1400, delay = 0) {
   return value;
 }
 
-// ─── SVG Arc Ring ─────────────────────────────────────────────────────────
-const ArcRing = memo(function ArcRing({
-  value, max, active, delay = 0, color, size = 72, stroke = 5,
-}) {
-  const circleRef = useRef(null);
-  const r = (size - stroke) / 2;
-  const circ = 2 * Math.PI * r;
-  const target = (value / max) * circ;
+// ─── Liquid Fill ──────────────────────────────────────────────────────────
+const LiquidFill = memo(function LiquidFill({ pct, active, delay = 0, color }) {
+  const liquidRef = useRef(null);
+  const waveAnim = useRef(null);
 
   useEffect(() => {
-    const el = circleRef.current;
+    const el = liquidRef.current;
     if (!el) return;
+
+    if (!waveAnim.current) {
+      const path = el.querySelector("path");
+      waveAnim.current = animate(path, {
+        d: [
+          { value: "M-10,8 C10,2 30,14 50,8 C70,2 90,14 110,8 C130,2 150,14 170,8 L170,30 L-10,30 Z" },
+          { value: "M-10,8 C10,14 30,2 50,8 C70,14 90,2 110,8 C130,14 150,2 170,8 L170,30 L-10,30 Z" },
+        ],
+        duration: 2200,
+        loop: true,
+        direction: "alternate",
+        easing: "easeInOutSine",
+      });
+    }
+
     if (!active) {
-      el.style.strokeDashoffset = circ;
+      el.style.height = "0%";
       return;
     }
-    el.style.willChange = "stroke-dashoffset";
+
+    el.style.willChange = "height";
     const a = animate(el, {
-      strokeDashoffset: [circ, circ - target],
-      duration: 1400,
+      height: ["0%", `${pct}%`],
+      duration: 1500,
       delay,
       easing: "easeOutExpo",
+      complete: () => { el.style.willChange = "auto"; },
     });
-    return () => {
-      a.pause();
-      el.style.willChange = "auto";
-    };
-  }, [active, circ, target, delay]);
+
+    return () => a.pause();
+  }, [active, pct, delay]);
 
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox={`0 0 ${size} ${size}`}
-      style={{ transform: "rotate(-90deg)" }}
-      aria-hidden="true"
+    <div
+      style={{
+        position: "absolute",
+        inset: 0,
+        borderRadius: "18px",
+        overflow: "hidden",
+      }}
     >
-      {/* Track ring — uses theme border color */}
-      <circle
-        cx={size / 2} cy={size / 2} r={r}
-        fill="none"
-        stroke="var(--color-border)"
-        strokeWidth={stroke}
-      />
-      {/* Progress ring */}
-      <circle
-        ref={circleRef}
-        cx={size / 2} cy={size / 2} r={r}
-        fill="none"
-        stroke={color}
-        strokeWidth={stroke}
-        strokeLinecap="round"
-        strokeDasharray={circ}
-        strokeDashoffset={circ}
-        style={{ filter: `drop-shadow(0 0 6px ${color}99)` }}
-      />
-    </svg>
+      <div
+        ref={liquidRef}
+        data-liquid
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "0%",
+        }}
+      >
+        {/* Solid fill body — full brand color at good opacity */}
+        <div style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          top: "14px", // below the wave crest
+          background: `color-mix(in srgb, ${color} 100%, transparent)`,
+        }} />
+
+        {/* Wave SVG sits on top of the fill body */}
+       
+      </div>
+    </div>
   );
 });
 
@@ -94,8 +111,9 @@ const ArcRing = memo(function ArcRing({
 const StatTile = memo(function StatTile({ stat, active, index, accentColor }) {
   const numericTarget = parseInt(stat.value.replace(/\D/g, ""), 10) || 0;
   const ringMax = numericTarget <= 10 ? 10 : numericTarget <= 30 ? 30 : 200;
+  const fillPct = Math.min((numericTarget / ringMax) * 100, 100);
   const delay = index * 120;
-  const count = useCounter(numericTarget, active, 1400, delay);
+  const count = useCounter(numericTarget, active, 1500, delay);
   const tileRef = useRef(null);
 
   useEffect(() => {
@@ -122,32 +140,45 @@ const StatTile = memo(function StatTile({ stat, active, index, accentColor }) {
 
   return (
     <div
-      ref={tileRef}
-      className="flex flex-col items-center gap-2 p-4 rounded-[18px]"
-      style={{
-        background: "var(--color-background)",
-        border: "1px solid var(--color-border)",
-        backdropFilter: "blur(8px)",
-        opacity: 0,
-      }}
-    >
-      <div className="relative flex items-center justify-center">
-        <ArcRing
-          value={numericTarget}
-          max={ringMax}
-          active={active}
-          delay={delay}
-          color={accentColor}
-          size={72}
-          stroke={5}
-        />
-        <span className="absolute font-bebas text-[20px] leading-none" style={{ color: accentColor }}>
-          {count}<span style={{ fontSize: "12px" }}>+</span>
-        </span>
-      </div>
+  ref={tileRef}
+  className="flex flex-col items-center gap-2 p-4 rounded-[18px] stat-tile"
+  style={{
+    background: "var(--color-background)",
+    border: "1px solid var(--color-border)",
+    position: "relative",
+    overflow: "hidden",
+    opacity: 0,
+  }}
+>
+  <style>{`
+    .stat-tile {
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
+                  border-color 0.2s ease,
+                  box-shadow 0.3s ease;
+    }
+    .stat-tile:hover {
+      transform: translateY(-4px);
+      border-color: var(--color-brand) !important;
+      box-shadow: 0 8px 24px color-mix(in srgb, var(--color-brand) 20%, transparent);
+    }
+  `}</style>
+
+      <LiquidFill
+        pct={fillPct}
+        active={active}
+        delay={delay + 200}
+        color={accentColor}
+      />
+
+      <span
+        className="font-bebas text-[20px] leading-none"
+        style={{ position: "relative", zIndex: 2, color: "var(--color-foreground)" }}
+      >
+        {count}<span style={{ fontSize: "12px", color: accentColor }}>+</span>
+      </span>
       <span
         className="font-satoshi text-center leading-tight"
-        style={{ fontSize: "11px", color: "var(--color-muted)" }}
+        style={{ fontSize: "11px", color: "var(--color-muted)", position: "relative", zIndex: 2 }}
       >
         {stat.label}
       </span>

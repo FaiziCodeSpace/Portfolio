@@ -43,8 +43,7 @@ const navbar = {
     links: [
       { id: "services", label: "Services" },
       { id: "process", label: "Process" },
-      { id: "pricing", label: "Pricing" },
-      { id: "about", label: "About us" },
+      { id: "about", label: "About" },
       { id: "contact", label: "Contact" },
     ],
   },
@@ -1159,7 +1158,6 @@ const footer = {
     links: [
       { label: "Landing", id: "hero" },
       { label: "Process", id: "process" },
-      { label: "Pricing", id: "pricing" },
       { label: "Testimonials", id: "testimonials" },
     ],
     copyright: (year) => `© ${year} Good Developer. All rights reserved.`,
