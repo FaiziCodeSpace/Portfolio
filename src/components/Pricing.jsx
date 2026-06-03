@@ -84,6 +84,7 @@ function Modal({ plan, onClose, modalT }) {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const t = useContent("pricing");
 
   if (!plan) return null;
 
@@ -242,7 +243,7 @@ function Modal({ plan, onClose, modalT }) {
       <div className="modal-wrap">
 
         <div className="modal-left">
-          
+
           {[
             { anim: "orbit1 7s linear infinite", size: 7, color: "rgba(9,9,11,0.25)" },
             { anim: "orbit2 5s linear infinite", size: 5, color: "rgba(9,9,11,0.18)" },
@@ -270,7 +271,7 @@ function Modal({ plan, onClose, modalT }) {
           ))}
 
           <div style={{ position: "relative", zIndex: 1 }}>
-            
+
             <button
               onClick={onClose}
               className="modal-close-desktop"
@@ -326,7 +327,7 @@ function Modal({ plan, onClose, modalT }) {
           </div>
 
           <p style={{ fontSize: "12px", color: "rgba(9,9,11,0.4)", margin: 0, marginTop: "2rem", position: "relative", zIndex: 1 }}>
-            No commitment. Cancel anytime.
+            {t.modal.noCommitmentMsg}
           </p>
         </div>
 
@@ -351,8 +352,8 @@ function Modal({ plan, onClose, modalT }) {
 
               <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "12px" }}>
                 <div>
-                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--color-text-primary)", margin: "0 0 4px" }}>Book a call</h3>
-                  <p style={{ fontSize: "13px", color: "var(--color-muted)", margin: 0 }}>Fill in your details and we'll get back within 24h.</p>
+                  <h3 style={{ fontSize: "18px", fontWeight: 700, color: "var(--color-text-primary)", margin: "0 0 4px" }}>{t.modal.bookCallTitle}</h3>
+                  <p style={{ fontSize: "13px", color: "var(--color-muted)", margin: 0 }}>{t.modal.topMsg}</p>
                 </div>
                 {/* Close btn — mobile only */}
                 <button
@@ -371,29 +372,29 @@ function Modal({ plan, onClose, modalT }) {
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                {lbl("Email", true)}
-                {inputWrap(<Mail size={15} />, <input type="email" name="email" value={form.email} onChange={handle} placeholder="you@company.com" style={inputBase} />)}
+                {lbl(t?.modal.emailLabel, true)}
+                {inputWrap(<Mail size={15} />, <input type="email" name="email" value={form.email} onChange={handle} placeholder={t.modal.emailPlaceholder} style={inputBase} />)}
                 {error && <span style={{ fontSize: "12px", color: "var(--color-brand)", fontWeight: 500 }}>{error}</span>}
               </div>
 
               <div className="form-grid-2">
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                  {lbl("Name")}
-                  {inputWrap(<User size={15} />, <input type="text" name="name" value={form.name} onChange={handle} placeholder="John Doe" style={inputBase} />)}
+                  {lbl(t?.modal.nameLabel)}
+                  {inputWrap(<User size={15} />, <input type="text" name="name" value={form.name} onChange={handle} placeholder={t.modal.namePlaceholder} style={inputBase} />)}
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                  {lbl("Phone")}
+                  {lbl(t?.modal.phoneLabel)}
                   {inputWrap(<Phone size={15} />, <input type="tel" name="phone" value={form.phone} onChange={handle} placeholder="+1 234 567" style={inputBase} />)}
                 </div>
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                {lbl("Website")}
-                {inputWrap(<Globe size={15} />, <input type="url" name="website" value={form.website} onChange={handle} placeholder="https://yoursite.com" style={inputBase} />)}
+                {lbl(t?.modal.websiteLabel)}
+                {inputWrap(<Globe size={15} />, <input type="url" name="website" value={form.website} onChange={handle} placeholder={t.modal.websitePlaceholder} style={inputBase} />)}
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                {lbl("Preferred slot")}
+                {lbl(t?.modal.preferedSlotLabel)}
                 <div className="form-grid-2">
                   {inputWrap(<Calendar size={15} />, <input type="date" name="date" value={form.date} onChange={handle} style={{ ...inputBase, fontSize: "13px" }} />)}
                   {inputWrap(<Clock size={15} />, <input type="time" name="time" value={form.time} onChange={handle} style={{ ...inputBase, fontSize: "13px" }} />)}
@@ -401,10 +402,10 @@ function Modal({ plan, onClose, modalT }) {
               </div>
 
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                {lbl("Message")}
+                {lbl(t?.modal.messageLabel)}
                 <div style={{ border: "1px solid var(--color-border)", borderRadius: "10px", padding: "10px 12px", backgroundColor: "var(--color-secondary)" }}>
                   <textarea name="message" value={form.message} onChange={handle} rows={3}
-                    placeholder="Tell us about your project…"
+                    placeholder={t.modal.msgPlaceholder}
                     style={{ border: "none", background: "transparent", outline: "none", fontSize: "14px", color: "var(--color-text-primary)", width: "100%", resize: "none", lineHeight: "1.6", minHeight: "72px" }}
                   />
                 </div>
@@ -420,12 +421,12 @@ function Modal({ plan, onClose, modalT }) {
                 display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
               }}>
                 <Send size={15} />
-                {loading ? "Sending…" : "Send request"}
+                {loading ? "Sending…" : t.modal.submitLabel}
               </button>
 
               <p style={{ textAlign: "center", fontSize: "12px", color: "var(--color-muted)", margin: 0 }}>
                 <Lock size={11} style={{ verticalAlign: "-1px", marginRight: "4px" }} />
-                Your info is private and never shared.
+                {t.modal.privacyWarning}
               </p>
 
             </form>

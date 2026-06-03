@@ -117,7 +117,7 @@ export function ContactModal({ onClose }) {
               </div>
             ))}
           </div>
-          <p style={{ fontSize: "12px", color: "rgba(9,9,11,0.4)", margin: 0, marginTop: "2rem", position: "relative", zIndex: 1 }}>We read every message personally.</p>
+          <p style={{ fontSize: "12px", color: "rgba(9,9,11,0.4)", margin: 0, marginTop: "2rem", position: "relative", zIndex: 1 }}>{t.weReadEveryMessage}</p>
         </div>
 
         {/* ── Right panel ── */}
@@ -171,11 +171,11 @@ export function ContactModal({ onClose }) {
               <div className="contact-grid-2">
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                   {lbl(t.nameLabel)}
-                  {inputWrap(<User size={15} />, <input type="text" name="name" value={form.name} onChange={handle} placeholder="John Doe" style={inputBase} />)}
+                  {inputWrap(<User size={15} />, <input type="text" name="name" value={form.name} onChange={handle} placeholder={t.namePlaceholder} style={inputBase} />)}
                 </div>
                 <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                   {lbl(t.emailLabel, true)}
-                  {inputWrap(<Mail size={15} />, <input type="email" name="email" value={form.email} onChange={handle} placeholder="you@company.com" style={inputBase} />)}
+                  {inputWrap(<Mail size={15} />, <input type="email" name="email" value={form.email} onChange={handle} placeholder={t.emailPlaceholder} style={inputBase} />)}
                   {errors.email && <span style={{ fontSize: "12px", color: "var(--color-brand)", fontWeight: 500 }}>{errors.email}</span>}
                 </div>
               </div>
@@ -183,14 +183,14 @@ export function ContactModal({ onClose }) {
               {/* Subject */}
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                 {lbl(t.subjectLabel)}
-                {inputWrap(<AlignLeft size={15} />, <input type="text" name="subject" value={form.subject} onChange={handle} placeholder="What's this about?" style={inputBase} />)}
+                {inputWrap(<AlignLeft size={15} />, <input type="text" name="subject" value={form.subject} onChange={handle} placeholder={t.subjectPlaceholder} style={inputBase} />)}
               </div>
 
               {/* Message */}
               <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
                 {lbl(t.messageLabel, true)}
                 <div style={{ border: "1px solid var(--color-border)", borderRadius: "10px", padding: "10px 12px", backgroundColor: "var(--color-secondary)" }}>
-                  <textarea name="message" value={form.message} onChange={handle} rows={4} placeholder="Tell us what's on your mind…" style={{ border: "none", background: "transparent", outline: "none", fontSize: "14px", color: "var(--color-text-primary)", width: "100%", resize: "none", lineHeight: "1.6", minHeight: "90px" }} />
+                  <textarea name="message" value={form.message} onChange={handle} rows={4} placeholder={t.msgPlaceholder} style={{ border: "none", background: "transparent", outline: "none", fontSize: "14px", color: "var(--color-text-primary)", width: "100%", resize: "none", lineHeight: "1.6", minHeight: "90px" }} />
                 </div>
                 {errors.message && <span style={{ fontSize: "12px", color: "var(--color-brand)", fontWeight: 500 }}>{errors.message}</span>}
               </div>
@@ -223,7 +223,7 @@ export function ContactModal({ onClose }) {
 
               <p style={{ textAlign: "center", fontSize: "12px", color: "var(--color-muted)", margin: 0 }}>
                 <Lock size={11} style={{ verticalAlign: "-1px", marginRight: "4px" }} />
-                Your info is private and never shared.
+                {t.privacyWarning}
               </p>
             </form>
           )}
