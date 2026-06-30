@@ -55,6 +55,16 @@ export default function RootLayout({ children }) {
             {children}
           </SmoothScroll>
         </ThemeProvider>
+
+        {/* Botpress Chat */}
+        <Script
+          src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://files.bpcontent.cloud/2026/06/30/08/20260630085635-28VYQSIN.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
