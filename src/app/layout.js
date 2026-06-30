@@ -6,6 +6,7 @@ import { Bebas_Neue } from "next/font/google";
 import localFont from "next/font/local";
 import SmoothScroll from "@/components/UI/SmoothScroll";
 import CustomCursor from "@/components/UI/cursor";
+import Script from "next/script";
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
